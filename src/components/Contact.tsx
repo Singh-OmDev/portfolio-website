@@ -48,12 +48,15 @@ export default function Contact() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                 >
-                    <a
-                        href={socials.email}
-                        className="inline-block px-8 py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-full font-medium text-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-200"
+                    <button
+                        onClick={() => {
+                            const mailto = socials.email.startsWith("mailto:") ? socials.email : `mailto:${socials.email}`;
+                            window.location.href = mailto;
+                        }}
+                        className="inline-block px-8 py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-full font-medium text-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-200 cursor-pointer"
                     >
                         Say Hello
-                    </a>
+                    </button>
                 </motion.div>
 
                 <motion.div
@@ -63,7 +66,7 @@ export default function Contact() {
                     transition={{ delay: 0.5 }}
                     className="mt-20 text-neutral-400 text-sm"
                 >
-                    &copy; {new Date().getFullYear()} Alex Dev. All rights reserved.
+                    &copy; {new Date().getFullYear()} Om Singh. All rights reserved.
                 </motion.div>
 
             </div>

@@ -13,10 +13,10 @@ export const portfolioData = {
     },
 
     socials: {
-        github: "https://github.com/yourusername",
+        github: "https://github.com/Singh-OmDev",
         linkedin: "https://linkedin.com/in/yourusername",
         twitter: "https://twitter.com/yourusername",
-        email: "mailto:youremail@gmail.com",
+        email: "mailto:omsingh8400@gmail.com",
         website: "https://yourportfolio.com",
     },
 
@@ -94,14 +94,14 @@ export const portfolioData = {
                 "/project.png",
         },
         {
-            title: "Noginx",
+            title: "AI Government Scheme Advisor",
             description:
-                "Real-time NGINX anomaly detection system leveraging machine learning to identify traffic irregularities and trigger automated alerts.",
-            tech: ["Python", "FastAPI", "NGINX", "Isolation Forest"],
+                "AI Government Scheme Advisor is a comprehensive web application designed to bridge the gap between Indian citizens and government welfare schemes. Using advanced AI (Llama 3.3 via Groq), it analyzes user profiles to discover relevant Central and State government schemes, explaining eligibility criteria, required documents, and application processes in simple, easy-to-understand language.",
+            tech: [" Node.js", "Express.js", "MongoDB", "Groq API", "Clerk", "React.js", "Tailwind CSS", "Framer Motion"],
             link: "#",
             github: "#",
             image:
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+                "/project2.png",
         },
         {
             title: "WorkQueue",
