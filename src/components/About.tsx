@@ -35,7 +35,7 @@ export default function About() {
                     </p>
                     <p className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
                         I believe in a web that is fast, accessible, and beautiful.
-                        When I'm not coding, I'm likely exploring new design trends or contributing to open source.
+                        When I&apos;m not coding, I&apos;m likely exploring new design trends or contributing to open source.
                     </p>
                 </motion.div>
 

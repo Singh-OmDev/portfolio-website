@@ -11,6 +11,7 @@ export default function Navbar() {
 
     useEffect(() => {
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             setIsDark(true);
             document.documentElement.classList.add("dark");
         }
@@ -67,7 +68,7 @@ export default function Navbar() {
     );
 }
 
-function DockIcon({ icon: Icon, label, onClick }: { icon: any, label: string, onClick?: () => void }) {
+function DockIcon({ icon: Icon, label, onClick }: { icon: React.ElementType, label: string, onClick?: () => void }) {
     const ref = useRef<HTMLButtonElement>(null);
     const mouseX = useMotionValue(Infinity);
 
