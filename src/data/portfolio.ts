@@ -84,14 +84,14 @@ export const portfolioData = {
 
     projects: [
         {
-            title: "DisasterNet",
+            title: "Study Buddy",
             description:
-                "A peer-to-peer emergency communication platform designed to function without internet connectivity, enabling resilient communication during network outages.",
-            tech: ["Go", "libp2p", "mDNS", "React", "REST APIs"],
-            link: "#",
-            github: "#",
+                "A full-stack, AI-powered study assistant designed to optimize learning retention through smart scheduling, personalized AI feedback, and immersive focus tools.",
+            tech: ["React.js (Vite)", " Tailwind CSS", "Framer Motion", "Node.js", "Express.js", "MongoDB" , " OpenAI SDK", "clerk"],
+            link: "https://ai-study-buddy-inky.vercel.app/",
+            github: "https://github.com/Singh-OmDev/AI-Study-Buddy?tab=readme-ov-file",
             image:
-                "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+                "/project.png",
         },
         {
             title: "Noginx",
