@@ -38,7 +38,7 @@ export default function Skills() {
                                 {categoryGroup.items.map((skill, skillIndex) => (
                                     <div
                                         key={skillIndex}
-                                        className="px-4 py-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors cursor-default"
+                                        className="px-4 py-2 bg-white rounded-xl border border-neutral-200 dark:border-none text-sm font-bold text-black shadow-sm cursor-default"
                                     >
                                         {skill}
                                     </div>
