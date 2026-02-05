@@ -25,7 +25,8 @@ export const portfolioData = {
         "Tailwind CSS",
         "Postman",
         "Express.js",
-        
+        "MySQL",
+        "C++",
         "MongoDB",
         "Redis",
         "Git"
