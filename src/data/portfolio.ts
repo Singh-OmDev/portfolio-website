@@ -15,7 +15,7 @@ export const portfolioData = {
     socials: {
         github: "https://github.com/Singh-OmDev",
         linkedin: "https://linkedin.com/in/yourusername",
-        twitter: "https://twitter.com/yourusername",
+        twitter: "https://twitter.com/omsingh8400",
         email: "mailto:omsingh8400@gmail.com",
         website: "https://yourportfolio.com",
     },
@@ -87,7 +87,7 @@ export const portfolioData = {
             title: "Study Buddy",
             description:
                 "A full-stack, AI-powered study assistant designed to optimize learning retention through smart scheduling, personalized AI feedback, and immersive focus tools.",
-            tech: ["React.js (Vite)", " Tailwind CSS", "Framer Motion", "Node.js", "Express.js", "MongoDB" , " OpenAI SDK", "clerk"],
+            tech: ["React.js (Vite)", " Tailwind CSS", "Framer Motion", "Node.js", "Express.js", "MongoDB", " OpenAI SDK", "clerk"],
             link: "https://ai-study-buddy-inky.vercel.app/",
             github: "https://github.com/Singh-OmDev/AI-Study-Buddy?tab=readme-ov-file",
             image:
