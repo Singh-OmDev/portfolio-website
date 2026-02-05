@@ -39,25 +39,8 @@ export default function Contact() {
                     transition={{ delay: 0.2 }}
                     className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 mb-12"
                 >
-                    I&apos;m currently open to new opportunities. If you have a project in mind or just want to say hi, feel free to reach out.
+                    Contact me at <a href={`mailto:${socials.email.replace(/^mailto:/, "")}`} className="text-blue-600 dark:text-blue-400 hover:underline">{socials.email.replace(/^mailto:/, "")}</a> or with a direct question on <a href={socials.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">twitter</a>
                 </motion.p>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                >
-                    <button
-                        onClick={() => {
-                            const mailto = socials.email.startsWith("mailto:") ? socials.email : `mailto:${socials.email}`;
-                            window.location.href = mailto;
-                        }}
-                        className="inline-block px-8 py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-full font-medium text-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-200 cursor-pointer"
-                    >
-                        Say Hello
-                    </button>
-                </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0 }}
