@@ -1,0 +1,113 @@
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Home, Moon, Sun, Github, Globe } from "lucide-react";
+import { portfolioData } from "@/data/portfolio";
+
+export default function Navbar() {
+    const [isDark, setIsDark] = useState(false);
+    const { socials } = portfolioData;
+
+    useEffect(() => {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setIsDark(true);
+            document.documentElement.classList.add("dark");
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        setIsDark(!isDark);
+        if (!isDark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    };
+
+    return (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+            <div className="flex items-end gap-2 px-4 py-3 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-full shadow-2xl">
+
+                <DockIcon
+                    icon={Home}
+                    label="Home"
+                    onClick={() => document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" })}
+                />
+
+                <div className="w-px h-6 bg-neutral-300 dark:bg-neutral-700 mx-1 self-center" />
+
+                <DockIcon
+                    icon={Github}
+                    label="Github"
+                    onClick={() => window.open(socials.github, "_blank")}
+                />
+                <DockIcon
+                    icon={Globe}
+                    label="Articles"
+                    onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                />
+                <DockIcon
+                    icon={XIcon}
+                    label="X (Twitter)"
+                    onClick={() => window.open(socials.twitter, "_blank")}
+                />
+
+                <div className="w-px h-6 bg-neutral-700 mx-1 self-center" />
+
+                <button
+                    onClick={toggleTheme}
+                    className="relative p-3 rounded-full text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
+                >
+                    {isDark ? <Sun size={24} /> : <Moon size={24} />}
+                </button>
+
+            </div>
+        </div>
+    );
+}
+
+function DockIcon({ icon: Icon, label, onClick }: { icon: any, label: string, onClick?: () => void }) {
+    const ref = useRef<HTMLButtonElement>(null);
+    const mouseX = useMotionValue(Infinity);
+
+    const distance = useTransform(mouseX, (val) => {
+        const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+        return val - bounds.x - bounds.width / 2;
+    });
+
+    const widthSync = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+    const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
+
+    return (
+        <motion.button
+            ref={ref}
+            onClick={onClick}
+            style={{ width }}
+            className="aspect-square rounded-full flex items-center justify-center relative group cursor-pointer"
+            onMouseMove={(e) => mouseX.set(e.pageX)}
+            onMouseLeave={() => mouseX.set(Infinity)}
+        >
+            <Icon size={24} className="text-neutral-500 group-hover:text-black dark:text-neutral-400 dark:group-hover:text-white transition-colors" />
+
+            {/* Tooltip */}
+            <span className="absolute -top-14 left-1/2 -translate-x-1/2 px-3 py-1 bg-white text-black text-sm font-serif font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
+                {label}
+            </span>
+        </motion.button>
+    );
+}
+
+// Custom X Icon
+const XIcon = ({ size, className }: { size?: number, className?: string }) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+);
