@@ -21,72 +21,64 @@ export const portfolioData = {
     },
 
     skills: [
-    {
-        category: "Backend Engineering",
-        items: [
-            "Node.js",
-            "Express.js",
-            "REST APIs",
-            "Redis",
-            "API Design",
-            "Authentication (JWT, Cookies)"
-        ]
-    },
-    {
-        category: "Databases",
-        items: [
-            "MongoDB",
-            "MySQL",
-            "Prisma ORM"
-        ]
-    },
-    {
-        category: "DevOps & Cloud",
-        items: [
-            "Docker",
-            "AWS (Basics)",
-            "Vercel",
-            "Git",
-            "Postman"
-        ]
-    },
-    {
-        category: "Frontend (Working Knowledge)",
-        items: [
-            "React.js",
-            "Next.js",
-            "Redux Toolkit",
-            "Tailwind CSS"
-        ]
-    },
-    {
-        category: "Languages",
-        items: [
-            "TypeScript",
-            "JavaScript",
-            "Java",
-            "C++"
-        ]
-    }
-],
+        {
+            category: "Backend Engineering",
+            items: [
+                "Node.js",
+                "Express.js",
+                "REST APIs",
+                "Redis",
+                "API Design",
+                "Authentication (JWT, Cookies)"
+            ]
+        },
+        {
+            category: "Databases",
+            items: [
+                "MongoDB",
+                "MySQL",
+                "Prisma ORM"
+            ]
+        },
+        {
+            category: "DevOps & Cloud",
+            items: [
+                "Docker",
+                "AWS (Basics)",
+                "Vercel",
+                "Git",
+                "Postman"
+            ]
+        },
+        {
+            category: "Frontend (Working Knowledge)",
+            items: [
+                "React.js",
+                "Next.js",
+                "Redux Toolkit",
+                "Tailwind CSS"
+            ]
+        },
+        {
+            category: "Languages",
+            items: [
+                "TypeScript",
+                "JavaScript",
+                "Java",
+                "C++"
+            ]
+        }
+    ],
 
 
     experience: [
         {
-            company: "Xlancr",
-            role: "Software Engineer",
-            period: "Aug 2024 — Mar 2025",
+            company: "Panipat Institute of Engineering and Technology",
+            role: "B.Tech in Computer Science Engineering",
+            period: "2023 — 2027",
             description:
-                "Engineered scalable backend services and RESTful APIs, improving system reliability and response times while collaborating within an agile development team.",
-            logo: "https://ui-avatars.com/api/?name=X&background=fff&color=000&rounded=true",
-        },
-        {
-            company: "RoverX",
-            role: "Software & Autonomous Systems Engineer",
-            period: "Mar 2023 — Feb 2024",
-            description:
-                "Contributed to autonomous system modules and path-planning logic, focusing on performance optimization and real-time decision workflows.",
-            logo: "https://ui-avatars.com/api/?name=RX&background=000&color=fff&rounded=true",
+                "Pursuing a comprehensive curriculum in Computer Science, building a strong foundation in algorithms, data structures, and software engineering principles.",
+            logo: "https://ui-avatars.com/api/?name=PIET&background=fff&color=000&rounded=true",
         },
     ],
 

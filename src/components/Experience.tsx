@@ -19,7 +19,7 @@ export default function Experience() {
                     className="mb-16 text-center"
                 >
                     <h2 className="text-3xl md:text-4xl font-serif font-medium text-neutral-900 dark:text-neutral-50">
-                        Work Experience
+                        Education
                     </h2>
                 </motion.div>
 
