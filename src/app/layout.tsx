@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google"; // Import fonts
 import "./globals.css";
+import Mascot from "@/components/Mascot";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 transition-colors duration-300 selection:bg-neutral-200 dark:selection:bg-neutral-800`}
       >
+        <Mascot />
         {children}
       </body>
     </html>

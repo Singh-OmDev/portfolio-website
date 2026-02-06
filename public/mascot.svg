@@ -1,0 +1,26 @@
+<svg width="64" height="64" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+  <!-- Head -->
+  <rect x="5" y="2" width="6" height="5" fill="#fec" />
+  <rect x="5" y="2" width="6" height="2" fill="#532" /> <!-- Hair -->
+  <rect x="11" y="4" width="1" height="1" fill="#532" /> <!-- Hair side -->
+  <rect x="4" y="4" width="1" height="1" fill="#532" /> <!-- Hair side -->
+  
+  <!-- Eyes -->
+  <rect x="6" y="5" width="1" height="1" fill="#000" />
+  <rect x="9" y="5" width="1" height="1" fill="#000" />
+  
+  <!-- Body -->
+  <rect x="5" y="7" width="6" height="5" fill="#333" /> <!-- Shirt -->
+  
+  <!-- Arms -->
+  <rect x="4" y="7" width="1" height="4" fill="#fec" />
+  <rect x="11" y="7" width="1" height="4" fill="#fec" />
+  
+  <!-- Legs -->
+  <rect x="5" y="12" width="2" height="3" fill="#224" />
+  <rect x="9" y="12" width="2" height="3" fill="#224" />
+  
+  <!-- Boots -->
+  <rect x="5" y="15" width="2" height="1" fill="#111" />
+  <rect x="9" y="15" width="2" height="1" fill="#111" />
+</svg>

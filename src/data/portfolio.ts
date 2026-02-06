@@ -18,6 +18,7 @@ export const portfolioData = {
         twitter: "https://twitter.com/omsingh8400",
         email: "mailto:omsingh8400@gmail.com",
         website: "https://yourportfolio.com",
+        resume: "/resume.pdf",
     },
 
     skills: [

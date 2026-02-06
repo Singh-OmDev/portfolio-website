@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
-import { Home, Moon, Sun, Github, Globe } from "lucide-react";
+import { Home, Moon, Sun, Github, Globe, FileText } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Navbar() {
@@ -61,6 +61,12 @@ export default function Navbar() {
                     icon={XIcon}
                     label="X (Twitter)"
                     onClick={() => window.open(socials.twitter, "_blank")}
+                />
+                <DockIcon
+                    mouseX={mouseX}
+                    icon={FileText}
+                    label="Resume"
+                    onClick={() => window.open(socials.resume, "_blank")}
                 />
 
                 <div className="w-px h-6 bg-neutral-700 mx-1 self-center" />
