@@ -15,24 +15,59 @@ export async function GET() {
         const tracksData = data?.recenttracks?.track;
         const recentTracks = Array.isArray(tracksData) ? tracksData : (tracksData ? [tracksData] : []);
 
-        if (recentTracks.length === 0) {
-            return NextResponse.json({ isPlaying: false });
-        }
-
-        const track = recentTracks[0];
+        let track = recentTracks[0];
+        let isPlaying = false;
+        let previewUrl = null;
 
         if (!track) {
+            // FALLBACK: If Last.fm returns no data (e.g. user hasn't listened in a while or empty history),
+            // fetch a default "Recommended" track so the widget isn't empty.
+            // Using "Goo Goo Dolls - Iris" as a safe, popular default.
+            try {
+                const fallbackRes = await fetch(`https://itunes.apple.com/search?term=Goo+Goo+Dolls+Iris&media=music&limit=1`, { cache: 'no-store' });
+                const fallbackData = await fallbackRes.json();
+                const result = fallbackData.results?.[0];
+
+                if (result) {
+                    return NextResponse.json({
+                        isPlaying: false, // Show as "Last Played" / Paused
+                        title: result.trackName,
+                        artist: result.artistName,
+                        album: result.collectionName,
+                        albumImageUrl: result.artworkUrl100?.replace("100x100", "300x300"), // Higher res if possible
+                        songUrl: result.trackViewUrl,
+                        previewUrl: result.previewUrl
+                    });
+                }
+            } catch (e) {
+                console.error("Fallback fetch failed", e);
+            }
+            // If fallback also fails, return empty
             return NextResponse.json({ isPlaying: false });
         }
-        const isPlaying = track['@attr']?.nowplaying === 'true';
 
-        let previewUrl = null;
-        if (isPlaying) {
+        isPlaying = track['@attr']?.nowplaying === 'true';
+
+        let albumImageUrl = track.image.find((img: any) => img.size === 'medium')?.['#text'] || track.image[0]?.['#text'];
+
+        // The content of the former 'if (isPlaying)' block is now directly here.
+        // The user's provided "Code Edit" also wraps this in 'if (track)', which is incorporated.
+        if (track) {
             try {
                 const query = encodeURIComponent(`${track.artist['#text']} ${track.name}`);
                 const itunesRes = await fetch(`https://itunes.apple.com/search?term=${query}&media=music&limit=1`, { cache: 'no-store' });
                 const itunesData = await itunesRes.json();
-                previewUrl = itunesData.results?.[0]?.previewUrl || null;
+                const itunesTrack = itunesData.results?.[0];
+
+                if (itunesTrack) {
+                    previewUrl = itunesTrack.previewUrl || null;
+
+                    // If Last.fm image is missing or is the default placeholder, use iTunes image
+                    // The placeholder usually contains "2a96cbd8b46e442fc41c2b86b821562f" or is empty
+                    if (!albumImageUrl || albumImageUrl.includes('2a96cbd8b46e442fc41c2b86b821562f') || albumImageUrl === '') {
+                        albumImageUrl = itunesTrack.artworkUrl100?.replace('100x100', '300x300');
+                    }
+                }
             } catch (error) {
                 console.error('Error fetching iTunes preview:', error);
             }
@@ -43,7 +78,7 @@ export async function GET() {
             title: track.name,
             artist: track.artist['#text'],
             album: track.album['#text'],
-            albumImageUrl: track.image.find((img: any) => img.size === 'medium')?.['#text'] || track.image[0]?.['#text'],
+            albumImageUrl: albumImageUrl,
             songUrl: track.url,
             previewUrl: previewUrl
         });
