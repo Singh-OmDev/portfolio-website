@@ -5,11 +5,14 @@ import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import Image from "next/image";
 
+import SpotifyWidget from "@/components/SpotifyWidget";
+
 export default function Hero() {
     const { profile } = portfolioData;
 
     return (
-        <section id="hero" className="min-h-[85vh] flex items-center justify-center pt-20">
+        <section id="hero" className="min-h-[85vh] flex items-center justify-center pt-20 relative">
+            <SpotifyWidget />
             <div className="max-w-5xl w-full px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
                 {/* Text Content */}
