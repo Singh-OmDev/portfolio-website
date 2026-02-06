@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useSpring, useTransform } from "framer-motion";
+import { motion, useSpring, useTransform, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -12,24 +12,39 @@ const MASCOTS = [
 ];
 
 export default function Mascot() {
+    const [mounted, setMounted] = useState(false);
     const [mascotSrc, setMascotSrc] = useState("/mascot-ghost.svg");
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const randomMascot = MASCOTS[Math.floor(Math.random() * MASCOTS.length)];
+        setMascotSrc(randomMascot);
+    }, []);
 
     const mouse = {
-        x: useSpring(0, { stiffness: 5, damping: 20, mass: 1 }), // Very slow, laggy follow
-        y: useSpring(0, { stiffness: 5, damping: 20, mass: 1 })
+        x: useSpring(0, { stiffness: 2, damping: 15, mass: 2 }), // Very slow, heavy follow
+        y: useSpring(0, { stiffness: 2, damping: 15, mass: 2 })
     };
 
-    // Smooth physics values
     const smoothMouse = {
         x: mouse.x,
         y: mouse.y
     };
 
-    // Optional: Calculate rotation based on X velocity (lean forward/back)
     const rotate = useTransform(mouse.x, (current) => {
         const velocity = mouse.x.getVelocity();
-        // Limit rotation to small angles (-10 to 10 degrees)
-        return Math.min(Math.max(velocity * 0.02, -10), 10);
+        // Removed side-effect setIsFlipped from here to prevent re-renders during render phase
+        return Math.min(Math.max(velocity * 0.05, -15), 15);
+    });
+
+    useMotionValueEvent(mouse.x, "change", (latest) => {
+        const velocity = mouse.x.getVelocity();
+        if (velocity < -5 && !isFlipped) {
+            setIsFlipped(true);
+        } else if (velocity > 5 && isFlipped) {
+            setIsFlipped(false);
+        }
     });
 
     useEffect(() => {
@@ -41,13 +56,9 @@ export default function Mascot() {
 
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [mouse.x, mouse.y]);
+    }, [mouse.x]); // Removed mouse.y dependency as it's stable
 
-    useEffect(() => {
-        // Randomly select a mascot on mount
-        const randomMascot = MASCOTS[Math.floor(Math.random() * MASCOTS.length)];
-        setMascotSrc(randomMascot);
-    }, []);
+    if (!mounted) return null;
 
     return (
         <div className="fixed inset-0 z-40 overflow-hidden pointer-events-none">
@@ -56,21 +67,12 @@ export default function Mascot() {
                 style={{
                     x: smoothMouse.x,
                     y: smoothMouse.y,
-                    rotate: rotate
+                    rotate: rotate,
+                    scaleX: isFlipped ? -1 : 1 // Flip horizontal to face direction
                 }}
             >
                 <div className="relative w-16 h-16 -translate-x-1/2 -translate-y-1/2">
-                    {/* -translate to center the mascot on the cursor */}
-
-                    {/* Floating hover animation remains for life */}
-                    <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                    >
+                    <motion.div>
                         <Image
                             src={mascotSrc}
                             alt="Mascot"
