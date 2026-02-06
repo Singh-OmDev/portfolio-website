@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Drop Shadow -->
+  <ellipse cx="32" cy="58" rx="18" ry="4" fill="#000" opacity="0.2" />
+
+  <!-- Cat Body -->
+  <path d="M16 24 Q12 10 24 18 L28 20 L36 20 L40 18 Q52 10 48 24 Q56 36 52 54 H12 Q8 36 16 24 Z" fill="#ffcc80" stroke="#ef6c00" stroke-width="2"/>
+  
+  <!-- Ears -->
+  <path d="M18 20 L16 10 L24 16" fill="#ffcc80" stroke="#ef6c00" stroke-width="2"/>
+  <path d="M46 20 L48 10 L40 16" fill="#ffcc80" stroke="#ef6c00" stroke-width="2"/>
+
+  <!-- Eyes -->
+  <circle cx="24" cy="32" r="3" fill="#333" />
+  <circle cx="40" cy="32" r="3" fill="#333" />
+
+  <!-- Nose & Whiskers -->
+  <path d="M30 36 L32 38 L34 36" stroke="#333" stroke-width="2" fill="none" />
+  <line x1="14" y1="36" x2="20" y2="34" stroke="#333" stroke-width="1" />
+  <line x1="14" y1="38" x2="20" y2="38" stroke="#333" stroke-width="1" />
+  <line x1="50" y1="36" x2="44" y2="34" stroke="#333" stroke-width="1" />
+  <line x1="50" y1="38" x2="44" y2="38" stroke="#333" stroke-width="1" />
+</svg>

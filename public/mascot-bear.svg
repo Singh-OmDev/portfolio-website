@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Drop Shadow -->
+  <ellipse cx="32" cy="58" rx="16" ry="4" fill="#000" opacity="0.2" />
+
+  <!-- Bear Head/Body -->
+  <circle cx="32" cy="32" r="22" fill="#8d6e63" stroke="#4e342e" stroke-width="2" />
+  
+  <!-- Ears -->
+  <circle cx="16" cy="18" r="8" fill="#8d6e63" stroke="#4e342e" stroke-width="2" />
+  <circle cx="48" cy="18" r="8" fill="#8d6e63" stroke="#4e342e" stroke-width="2" />
+  <circle cx="16" cy="18" r="4" fill="#d7ccc8" />
+  <circle cx="48" cy="18" r="4" fill="#d7ccc8" />
+
+  <!-- Snout -->
+  <ellipse cx="32" cy="36" rx="10" ry="8" fill="#d7ccc8" />
+  <circle cx="32" cy="34" r="3" fill="#333" />
+  <path d="M32 37 L32 40 M28 40 Q32 44 36 40" stroke="#333" stroke-width="2" fill="none" />
+
+  <!-- Eyes -->
+  <circle cx="24" cy="28" r="3" fill="#333" />
+  <circle cx="40" cy="28" r="3" fill="#333" />
+</svg>

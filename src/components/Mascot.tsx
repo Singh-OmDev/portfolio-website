@@ -1,72 +1,70 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
+import { motion, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const MASCOTS = [
+    "/mascot-ghost.svg",
+    "/mascot-cat.svg",
+    "/mascot-bear.svg",
+    "/mascot-robot.svg",
+];
 
 export default function Mascot() {
-    const controls = useAnimation();
+    const [mascotSrc, setMascotSrc] = useState("/mascot-ghost.svg");
 
-    const wander = async () => {
-        // Calculate random position within the viewport (with some padding)
-        // Using window.innerWidth/Height directly in animate can be tricky with hydration,
-        // so we use percentages or a safer approach. Here we'll use viewport units for simplicity
-        // or just calculate random pixels if we are client-side.
-
-        const randomX = Math.random() * (window.innerWidth - 64); // subtract width
-        const randomY = Math.random() * (window.innerHeight - 64); // subtract height
-
-        // Calculate a duration based on distance to keep speed roughly constant
-        // For simplicity, just a random slow duration between 5s and 10s
-        const duration = 5 + Math.random() * 5;
-
-        try {
-            await controls.start({
-                x: randomX,
-                y: randomY,
-                transition: {
-                    duration: duration,
-                    ease: "linear"
-                }
-            });
-            // Recursively wander to next point
-            wander();
-        } catch (e) {
-            // Animation stopped (e.g. by dragging), do nothing
-        }
+    const mouse = {
+        x: useSpring(0, { stiffness: 5, damping: 20, mass: 1 }), // Very slow, laggy follow
+        y: useSpring(0, { stiffness: 5, damping: 20, mass: 1 })
     };
 
+    // Smooth physics values
+    const smoothMouse = {
+        x: mouse.x,
+        y: mouse.y
+    };
+
+    // Optional: Calculate rotation based on X velocity (lean forward/back)
+    const rotate = useTransform(mouse.x, (current) => {
+        const velocity = mouse.x.getVelocity();
+        // Limit rotation to small angles (-10 to 10 degrees)
+        return Math.min(Math.max(velocity * 0.02, -10), 10);
+    });
+
     useEffect(() => {
-        // Start wandering on mount
-        wander();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        const handleMouseMove = (e: MouseEvent) => {
+            const { clientX, clientY } = e;
+            mouse.x.set(clientX);
+            mouse.y.set(clientY);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [mouse.x, mouse.y]);
+
+    useEffect(() => {
+        // Randomly select a mascot on mount
+        const randomMascot = MASCOTS[Math.floor(Math.random() * MASCOTS.length)];
+        setMascotSrc(randomMascot);
     }, []);
 
     return (
         <div className="fixed inset-0 z-40 overflow-hidden pointer-events-none">
-            {/* 
-                Container is pointer-events-none to let clicks pass through to the site, 
-                BUT the mascot itself will have pointer-events-auto.
-            */}
             <motion.div
-                className="absolute cursor-grab active:cursor-grabbing pointer-events-auto"
-                drag
-                dragMomentum={false}
-                animate={controls}
-                onDragStart={() => {
-                    // Stop wandering when user grabs the mascot
-                    controls.stop();
+                className="absolute top-0 left-0"
+                style={{
+                    x: smoothMouse.x,
+                    y: smoothMouse.y,
+                    rotate: rotate
                 }}
-                onDragEnd={() => {
-                    // Resume wandering from the new position
-                    wander();
-                }}
-                whileTap={{ scale: 1.1 }}
             >
-                <div className="relative w-16 h-16">
-                    {/* Bouncing animation to simulate floating/walking - keeps running even while dragging */}
+                <div className="relative w-16 h-16 -translate-x-1/2 -translate-y-1/2">
+                    {/* -translate to center the mascot on the cursor */}
+
+                    {/* Floating hover animation remains for life */}
                     <motion.div
-                        animate={{ y: [0, -6, 0] }}
+                        animate={{ y: [0, -8, 0] }}
                         transition={{
                             duration: 2,
                             repeat: Infinity,
@@ -74,13 +72,13 @@ export default function Mascot() {
                         }}
                     >
                         <Image
-                            src="/mascot.svg"
-                            alt="Pixel Mascot"
+                            src={mascotSrc}
+                            alt="Mascot"
                             width={64}
                             height={64}
-                            className="pixelated drop-shadow-xl select-none"
-                            style={{ imageRendering: "pixelated" }}
+                            className="drop-shadow-2xl"
                             draggable={false}
+                            priority
                         />
                     </motion.div>
                 </div>
