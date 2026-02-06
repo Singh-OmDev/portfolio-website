@@ -54,7 +54,7 @@ export default function Navbar() {
                     mouseX={mouseX}
                     icon={Globe}
                     label="Articles"
-                    onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={() => window.open(socials.medium, "_blank")}
                 />
                 <DockIcon
                     mouseX={mouseX}

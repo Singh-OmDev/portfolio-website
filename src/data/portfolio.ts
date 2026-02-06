@@ -19,6 +19,7 @@ export const portfolioData = {
         email: "mailto:omsingh8400@gmail.com",
         website: "https://yourportfolio.com",
         resume: "/resume.pdf",
+        medium: "https://medium.com/@omsingh8400",
     },
 
     skills: [
