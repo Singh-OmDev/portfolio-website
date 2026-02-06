@@ -26,7 +26,7 @@ export default function Hero() {
                         Hi, I&apos;m {profile.name}
                     </h1>
 
-                    <p className="text-xl md:text-2xl font-serif text-neutral-600 dark:text-neutral-200 leading-relaxed max-w-lg mb-8">
+                    <p className="text-xl md:text-2xl font-serif text-neutral-600 dark:text-neutral-200 leading-relaxed max-w-lg mb-10">
                         {profile.tagline}
                     </p>
                     {/* Spotify Widget placed here */}
