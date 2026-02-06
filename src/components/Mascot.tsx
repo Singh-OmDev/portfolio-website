@@ -71,7 +71,7 @@ export default function Mascot() {
                     scaleX: isFlipped ? -1 : 1 // Flip horizontal to face direction
                 }}
             >
-                <div className="relative w-16 h-16 -translate-x-1/2 -translate-y-1/2">
+                <div className="relative w-16 h-16 translate-x-4 translate-y-4">
                     <motion.div>
                         <Image
                             src={mascotSrc}

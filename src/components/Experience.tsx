@@ -36,7 +36,7 @@ export default function Experience() {
                             <div className="flex flex-col md:flex-row gap-6 md:items-start">
                                 {/* Logo */}
                                 <div className="flex-shrink-0 w-12 h-12 relative rounded-full overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-white">
-                                    <Image src={item.logo} alt={item.company} fill className="object-cover" />
+                                    <Image src={item.logo} alt={item.company} fill sizes="48px" className="object-cover" />
                                 </div>
 
                                 {/* Content */}

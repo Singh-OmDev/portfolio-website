@@ -42,6 +42,7 @@ export default function Hero() {
                                 src={profile.avatar}
                                 alt={profile.name}
                                 fill
+                                sizes="(max-width: 768px) 256px, 320px"
                                 className="object-cover"
                                 priority
                             />
