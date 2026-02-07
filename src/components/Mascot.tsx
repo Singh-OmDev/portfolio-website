@@ -2,9 +2,24 @@
 
 import { useEffect, useRef } from "react";
 
-export default function Mascot() {
+// Add your skin files to public/oneko/ and list them here
+const SKINS = [
+    "/oneko/oneko.gif",
+    "/oneko/oneko-dog.gif",
+    "/oneko/oneko-tora.gif",
+    "/oneko/oneko-maia.gif",
+    "/oneko/oneko-vaporwave.gif",
+];
+
+const Oneko = ({
+    initialPos = { x: 32, y: 32 },
+    targetOffset = { x: 0, y: 0 }
+}: {
+    initialPos?: { x: number, y: number },
+    targetOffset?: { x: number, y: number }
+}) => {
     const nekoRef = useRef<HTMLDivElement>(null);
-    const posRef = useRef({ x: 32, y: 32 });
+    const posRef = useRef(initialPos);
     const mouseRef = useRef({ x: 0, y: 0 });
     const frameRef = useRef(0);
     const idleTimeRef = useRef(0);
@@ -16,12 +31,26 @@ export default function Mascot() {
     const isDraggingRef = useRef(false);
     const dragOffsetRef = useRef({ x: 0, y: 0 });
 
+    // Select skin once on mount
+    const skinRef = useRef("/oneko/oneko.gif");
+
     useEffect(() => {
+        // Randomly select a skin on mount (client-side only to avoid hydration mismatch if using random)
+        // Since this runs in useEffect, it's safe.
+        skinRef.current = SKINS[Math.floor(Math.random() * SKINS.length)];
+
         const isReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
         if (isReducedMotion) return;
 
         const nekoEl = nekoRef.current;
         if (!nekoEl) return;
+
+        // Apply the selected skin
+        nekoEl.style.backgroundImage = `url('${skinRef.current}')`;
+
+        // Randomize initial idle time so they don't all sleep/scratch at once
+        idleTimeRef.current = Math.floor(Math.random() * 10);
+
 
         const nekoSpeed = 10;
         const spriteSets: { [key: string]: number[][] } = {
@@ -107,14 +136,19 @@ export default function Mascot() {
                 if (nekoEl) {
                     nekoEl.style.left = `${posRef.current.x - 16}px`;
                     nekoEl.style.top = `${posRef.current.y - 16}px`;
-                    setSprite("scratchSelf", 0); // Show generic "grabbed" or alert state
+                    setSprite("scratchSelf", 0);
                 }
                 return;
             }
 
             frameRef.current += 1;
-            const diffX = posRef.current.x - mouseRef.current.x;
-            const diffY = posRef.current.y - mouseRef.current.y;
+
+            // Target is mouse position + offset
+            const targetX = mouseRef.current.x + targetOffset.x;
+            const targetY = mouseRef.current.y + targetOffset.y;
+
+            const diffX = posRef.current.x - targetX;
+            const diffY = posRef.current.y - targetY;
             const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
             if (distance < nekoSpeed || distance < 48) {
@@ -127,7 +161,6 @@ export default function Mascot() {
 
             if (idleTimeRef.current > 1) {
                 setSprite("alert", 0);
-                // count down after being alerted before moving
                 idleTimeRef.current = Math.min(idleTimeRef.current, 7);
                 idleTimeRef.current -= 1;
                 return;
@@ -168,26 +201,19 @@ export default function Mascot() {
             mouseRef.current.y = event.clientY;
 
             if (isDraggingRef.current) {
-                // Determine new position based on mouse - offset
                 const newX = event.clientX - dragOffsetRef.current.x;
                 const newY = event.clientY - dragOffsetRef.current.y;
-
-                // Update posRef (center of cat)
                 posRef.current.x = newX + 16;
                 posRef.current.y = newY + 16;
             }
         };
 
         const handleMouseDown = (event: MouseEvent) => {
-            // Only allow left click drag
             if (event.button !== 0) return;
             event.preventDefault();
 
             isDraggingRef.current = true;
 
-            // Calculate offset logic:
-            // nekoEl 'left' is at posRef.current.x - 16
-            // We want to keep the mouse relative to the top-left corner consistent
             const rect = nekoEl.getBoundingClientRect();
             dragOffsetRef.current = {
                 x: event.clientX - rect.left,
@@ -214,25 +240,30 @@ export default function Mascot() {
                 window.cancelAnimationFrame(requestRef.current);
             }
         };
-    }, []);
+    }, [targetOffset]);
 
     return (
         <div
-            id="oneko"
             ref={nekoRef}
             aria-hidden="true"
             style={{
                 width: "32px",
                 height: "32px",
                 position: "fixed",
-                pointerEvents: "auto", // Changed from none to auto to enable clicks
-                cursor: "grab", // Show grab cursor
+                pointerEvents: "auto",
+                cursor: "grab",
                 imageRendering: "pixelated",
-                left: "16px",
-                top: "16px",
+                left: `${initialPos.x - 16}px`,
+                top: `${initialPos.y - 16}px`,
                 zIndex: 9999,
-                backgroundImage: "url('/oneko/oneko.gif')",
+                // backgroundImage set in useEffect
             }}
         />
+    );
+};
+
+export default function Mascot() {
+    return (
+        <Oneko initialPos={{ x: 32, y: 32 }} targetOffset={{ x: 0, y: 0 }} />
     );
 }
