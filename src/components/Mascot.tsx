@@ -13,6 +13,9 @@ export default function Mascot() {
     const lastFrameTimestampRef = useRef<number>(0);
     const requestRef = useRef<number>(0);
 
+    const isDraggingRef = useRef(false);
+    const dragOffsetRef = useRef({ x: 0, y: 0 });
+
     useEffect(() => {
         const isReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
         if (isReducedMotion) return;
@@ -99,6 +102,16 @@ export default function Mascot() {
         }
 
         function frame() {
+            // Skip autonomous movement if dragging
+            if (isDraggingRef.current) {
+                if (nekoEl) {
+                    nekoEl.style.left = `${posRef.current.x - 16}px`;
+                    nekoEl.style.top = `${posRef.current.y - 16}px`;
+                    setSprite("scratchSelf", 0); // Show generic "grabbed" or alert state
+                }
+                return;
+            }
+
             frameRef.current += 1;
             const diffX = posRef.current.x - mouseRef.current.x;
             const diffY = posRef.current.y - mouseRef.current.y;
@@ -153,13 +166,50 @@ export default function Mascot() {
         const handleMouseMove = (event: MouseEvent) => {
             mouseRef.current.x = event.clientX;
             mouseRef.current.y = event.clientY;
+
+            if (isDraggingRef.current) {
+                // Determine new position based on mouse - offset
+                const newX = event.clientX - dragOffsetRef.current.x;
+                const newY = event.clientY - dragOffsetRef.current.y;
+
+                // Update posRef (center of cat)
+                posRef.current.x = newX + 16;
+                posRef.current.y = newY + 16;
+            }
+        };
+
+        const handleMouseDown = (event: MouseEvent) => {
+            // Only allow left click drag
+            if (event.button !== 0) return;
+            event.preventDefault();
+
+            isDraggingRef.current = true;
+
+            // Calculate offset logic:
+            // nekoEl 'left' is at posRef.current.x - 16
+            // We want to keep the mouse relative to the top-left corner consistent
+            const rect = nekoEl.getBoundingClientRect();
+            dragOffsetRef.current = {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+        };
+
+        const handleMouseUp = () => {
+            isDraggingRef.current = false;
         };
 
         document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
+        nekoEl.addEventListener("mousedown", handleMouseDown);
+
         requestRef.current = window.requestAnimationFrame(onAnimationFrame);
 
         return () => {
             document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+            if (nekoEl) nekoEl.removeEventListener("mousedown", handleMouseDown);
+
             if (requestRef.current) {
                 window.cancelAnimationFrame(requestRef.current);
             }
@@ -175,13 +225,13 @@ export default function Mascot() {
                 width: "32px",
                 height: "32px",
                 position: "fixed",
-                pointerEvents: "none",
+                pointerEvents: "auto", // Changed from none to auto to enable clicks
+                cursor: "grab", // Show grab cursor
                 imageRendering: "pixelated",
                 left: "16px",
                 top: "16px",
                 zIndex: 9999,
                 backgroundImage: "url('/oneko/oneko.gif')",
-                // Initialize off-screen or safe default
             }}
         />
     );
