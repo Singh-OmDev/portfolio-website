@@ -106,7 +106,7 @@ export default function Contact() {
                                 required
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="John Doe"
+                                placeholder="Om Singh"
                                 className={inputClasses}
                             />
                             <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-neutral-900 dark:group-focus-within:text-white transition-colors" />
@@ -126,7 +126,7 @@ export default function Contact() {
                                 required
                                 value={formData.phone}
                                 onChange={handleChange}
-                                placeholder="+1 (555) 000-0000"
+                                placeholder="+91 9876543210"
                                 className={inputClasses}
                             />
                             <Phone size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-neutral-900 dark:group-focus-within:text-white transition-colors" />
@@ -146,7 +146,7 @@ export default function Contact() {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="john@example.com"
+                                placeholder="omsingh8400@gmail.com"
                                 className={inputClasses}
                             />
                             <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-neutral-900 dark:group-focus-within:text-white transition-colors" />
