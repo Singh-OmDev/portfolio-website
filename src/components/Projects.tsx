@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import Image from "next/image";
+import Link from "next/link";
 import { Github, Globe } from "lucide-react";
 
 export default function Projects() {
@@ -58,8 +59,8 @@ export default function Projects() {
                             transition={{ delay: index * 0.1 }}
                             className="group flex flex-col bg-neutral-100 dark:bg-neutral-900/50 rounded-2xl p-0 overflow-hidden"
                         >
-                            {/* Image Card */}
-                            <div className="relative aspect-video w-full bg-neutral-800 overflow-hidden">
+                            {/* Image Card - Clickable */}
+                            <Link href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`} className="block relative aspect-video w-full bg-neutral-800 overflow-hidden cursor-pointer">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
@@ -68,13 +69,15 @@ export default function Projects() {
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                                 />
-                            </div>
+                            </Link>
 
                             {/* Text Content */}
-                            <div className="p-6">
-                                <h3 className="text-2xl font-serif font-bold text-neutral-900 dark:text-white mb-2">
-                                    {project.title}
-                                </h3>
+                            <div className="p-6 flex flex-col flex-grow">
+                                <Link href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`} className="block">
+                                    <h3 className="text-2xl font-serif font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        {project.title}
+                                    </h3>
+                                </Link>
                                 <p className="text-neutral-400 font-serif mb-4 min-h-[3rem]">
                                     {project.description}
                                 </p>
@@ -93,20 +96,34 @@ export default function Projects() {
 
                                 {/* Buttons */}
                                 <div className="flex gap-3 mt-auto">
-                                    <a
-                                        href={project.github}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg text-sm font-bold font-serif hover:bg-neutral-200 transition-colors"
+                                    <Link
+                                        href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`}
+                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-bold font-serif hover:opacity-90 transition-opacity"
                                     >
-                                        <Github size={16} />
-                                        Source
-                                    </a>
-                                    <a
-                                        href={project.link}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg text-sm font-bold font-serif hover:bg-neutral-200 transition-colors"
-                                    >
-                                        <Globe size={16} />
-                                        Demo
-                                    </a>
+                                        View Details
+                                    </Link>
+                                    {project.github !== "#" && (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg text-sm font-bold font-serif hover:bg-neutral-200 transition-colors border border-neutral-200"
+                                            aria-label="View Source Code"
+                                        >
+                                            <Github size={16} />
+                                        </a>
+                                    )}
+                                    {project.link !== "#" && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg text-sm font-bold font-serif hover:bg-neutral-200 transition-colors border border-neutral-200"
+                                            aria-label="View Live Demo"
+                                        >
+                                            <Globe size={16} />
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
