@@ -54,7 +54,11 @@ export async function GET() {
         // The user's provided "Code Edit" also wraps this in 'if (track)', which is incorporated.
         if (track) {
             try {
-                const query = encodeURIComponent(`${track.artist['#text']} ${track.name}`);
+                // Last.fm can return "Artist 1 | Artist 2", which confuses iTunes search.
+                // We'll take only the first artist for a cleaner search.
+                const cleanArtist = track.artist['#text'].split('|')[0].split(',')[0].split('&')[0].trim();
+                const query = encodeURIComponent(`${cleanArtist} ${track.name}`);
+
                 const itunesRes = await fetch(`https://itunes.apple.com/search?term=${query}&media=music&limit=1`, { cache: 'no-store' });
                 const itunesData = await itunesRes.json();
                 const itunesTrack = itunesData.results?.[0];
