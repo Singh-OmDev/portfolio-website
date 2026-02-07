@@ -174,7 +174,7 @@ export default function ProjectDetail() {
                                             viewport={{ once: true }}
                                             className="flex gap-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800"
                                         >
-                                            <div className="mt-1 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-full p-1 h-6 w-6 flex items-center justify-center shrink-0">
+                                            <div className="mt-1 bg-green-500 text-white rounded-full p-1 h-6 w-6 flex items-center justify-center shrink-0 shadow-sm shadow-green-500/30">
                                                 <CheckCircle2 size={14} />
                                             </div>
                                             <div className="text-lg text-neutral-700 dark:text-neutral-300">

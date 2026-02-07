@@ -84,6 +84,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
                 "MongoDB",
                 "OpenAI SDK",
                 "Clerk",
+                "Recharts",
             ],
             link: "https://ai-study-buddy-inky.vercel.app/",
             github:
@@ -93,18 +94,21 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
             timeline: "2025",
             team: "Solo",
             status: "Completed",
-            overview: "Study Buddy is designed to solve the problem of fragmented study tools. Instead of switching between a todo list, a timer, and ChatGPT, students can manage their entire workflow in one cohesive interface. It leverages OpenAI to generate personalized study plans based on the user's syllabus and available time.",
+            overview: "Study Buddy is a full-stack, AI-powered study assistant designed to optimize learning retention through smart scheduling, personalized AI feedback, and immersive focus tools. It solves the problem of fragmented study workflows by integrating task management, focus timers, and AI tutoring into a single cohesive platform.",
             features: [
-                "**AI Study Plans**: Generates daily schedules based on exam dates and syllabus.",
-                "**Smart Flashcards**: Creates flashcards automatically from notes using NLP.",
-                "**Focus Timer**: Pomodoro-style timer with ambient background sounds.",
-                "**Progress Analytics**: Visualizes study consistency and topic mastery."
+                "**AI Study Chat (RAG)**: Context-aware chat that helps you answer questions based on your study history and notes.",
+                "**Smart Quiz Generator**: Automatically creates revision questions to test your knowledge.",
+                "**Visual Calendar**: Interactive contribution graph to track study consistency.",
+                "**Confidence-Based Revision**: Uses Spaced Repetition logic to suggest optimal revision times.",
+                "**Zen Mode**: Minimalist full-screen clock with ambient backgrounds for flow state.",
+                "**Pro Dashboard**: Data-rich 'Bento Grid' style dashboard for tracking progress at a glance."
             ],
-            challenges: "Integrating real-time AI responses without blocking the UI was a significant challenge. I implemented streaming responses for the chat interface and optimistic UI updates for the task management system to ensure a buttery-smooth experience.",
+            challenges: "Implementing **Context-Aware RAG (Retrieval-Augmented Generation)** for the AI chat was the biggest technical hurdle. I had to efficiently chunk and index user notes to ensure the AI provided relevant answers without hallucinating.",
             learnings: [
-                "Deepened understanding of **Prompt Engineering** for educational contexts.",
-                "Mastered **MongoDB Aggregations** for complex analytics queries.",
-                "Implemented **Rate Limiting** to manage OpenAI API costs effectively."
+                "Mastered **RAG architectures** for personalized AI experiences.",
+                "Deepened knowledge of **Spaced Repetition Algorithms** for educational tech.",
+                "Built complex data visualizations using **Recharts**.",
+                "Implemented secure authentication flows with **Clerk**."
             ],
             future: [
                 "Mobile App using React Native.",
@@ -118,14 +122,14 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
             description:
                 "An AI-powered platform that helps Indian citizens discover relevant government welfare schemes by analyzing user profiles and explaining eligibility, documents, and application steps in simple language.",
             tech: [
+                "React.js (Vite)",
+                "Tailwind CSS",
+                "Framer Motion",
                 "Node.js",
                 "Express.js",
                 "MongoDB",
-                "Groq API",
+                "Groq API (Llama 3.3)",
                 "Clerk",
-                "React.js",
-                "Tailwind CSS",
-                "Framer Motion",
             ],
             link: "https://ai-government-scheme-advisor.vercel.app/",
             github: "https://github.com/Singh-OmDev/AI-Government-Scheme-Advisor",
@@ -134,14 +138,16 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
             timeline: "2024",
             team: "Hackathon Team",
             status: "Prototype",
-            overview: "Built during a 24-hour hackathon, this platform addresses the 'information gap' in public welfare. Many eligible citizens miss out on schemes simply because they don't know they exist or can't understand the complex bureaucratic language. Our AI simplifies this by acting as a personalized consultant.",
+            overview: "AI Government Scheme Advisor is a comprehensive web application designed to bridge the gap between Indian citizens and government welfare schemes. Using advanced AI (Llama 3.3 via Groq), it analyzes user profiles to discover relevant Central and State government schemes, explaining eligibility criteria, required documents, and application processes in simple, easy-to-understand language.",
             features: [
-                "**Natural Language Search**: Users describe their situation in plain English (or Hinglish).",
-                "**Eligibility Engine**: Matches user profile (income, caste, location) against database rules.",
-                "**Document Checklist**: auto-generates a list of required documents for each scheme.",
-                "**Multi-language Support**: Uses AI to translate scheme details into regional languages."
+                "**AI-Powered Recommendations**: Utilizes Llama 3.3 (via Groq) to analyze user data and suggest highly relevant schemes.",
+                "**Multi-Language Support**: Provides scheme details in both English and Hindi.",
+                "**Interactive AI Chat**: Users can ask specific questions about any scheme and get instant, context-aware answers.",
+                "**Secure Authentication**: Integrated with Clerk for secure and seamless user sign-up and login.",
+                "**Saved Schemes**: Users can bookmark schemes to their profile for easy access later.",
+                "**Smart Search**: Search functionality to find schemes by keywords."
             ],
-            challenges: "The biggest hurdle was the latency of standard LLMs. We switched to **Groq's LPU inference engine**, which accelerated our response times by 10x, making the chat experience feel instantaneous.",
+            challenges: "The biggest hurdle was the latency of standard LLMs. We switched to **Groq's LPU inference engine**, which accelerated our response times by 10x, making the chat experience feel instantaneous. Handling multi-language support (English/Hindi) dynamically for complex government terminology was also a key challenge.",
             learnings: [
                 "First-hand experience with **Groq and Llama 3** for high-speed inference.",
                 "Learned to structure **unstructured government data** into a queryable format.",
