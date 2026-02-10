@@ -4,7 +4,7 @@ export const portfolioData = {
         role: "Backend Engineer",
 
         tagline:
-            "Backend-focused engineer building scalable systems, high-performance APIs, and production-ready applications.",
+            "Backend-focused engineering student building scalable systems and high-performance APIs, with a strong interest in system design and production-grade backend development.",
 
         bio: `I’m a backend-focused developer with a strong foundation in computer science and a deep interest in building scalable, reliable systems. I primarily work within the JavaScript and TypeScript ecosystem, designing APIs, structuring databases, and developing backend services that are efficient, maintainable, and production-ready.
 
