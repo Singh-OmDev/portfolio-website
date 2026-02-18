@@ -5,7 +5,7 @@
 <img width="1893" height="865" alt="image" src="https://github.com/user-attachments/assets/22e0f9dc-f886-46c3-9d4e-35fba068fb08" />
 
 
-A minimalist, high-performance developer portfolio built with **Next.js 16**, **Tailwind CSS v4**, and **Framer Motion**. Features real-time music tracking via Last.fm, dynamic dark mode, and smooth page transitions.
+A minimalist, high-performance developer portfolio built with **Next.js 16**, **Tailwind CSS v4**, and **Framer Motion**. Features real-time music tracking via Last.fm, dynamic dark mode, and smooth page transitions
 
 ## 🚀 Features
 
