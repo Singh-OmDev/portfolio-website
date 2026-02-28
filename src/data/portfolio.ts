@@ -86,6 +86,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
                 "Clerk",
                 "Recharts",
             ],
+            audio: "/Study_Buddy_Anthem.mp3",
             link: "https://ai-study-buddy-inky.vercel.app/",
             github:
                 "https://github.com/Singh-OmDev/AI-Study-Buddy?tab=readme-ov-file",
@@ -131,6 +132,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
                 "Groq API (Llama 3.3)",
                 "Clerk",
             ],
+            audio: "/Scheme_Dreams.mp3",
             link: "https://ai-government-scheme-advisor.vercel.app/",
             github: "https://github.com/Singh-OmDev/AI-Government-Scheme-Advisor",
             image: "/project2.png",
