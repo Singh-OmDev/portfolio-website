@@ -45,7 +45,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
         },
         {
             category: "DevOps & Cloud",
-            items: ["Docker", "AWS (Basics)", "Vercel", "Git", "Postman"],
+            items: ["Docker", "AWS", "Vercel", "Git", "Postman"],
         },
         {
             category: "Frontend (Working Knowledge)",
