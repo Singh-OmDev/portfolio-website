@@ -6,6 +6,7 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import GithubGraph from "@/components/GithubGraph";
+import Playground from "@/components/Playground";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Experience />
       <Projects />
       <GithubGraph />
+      <Playground />
       <Contact />
     </main>
   );
