@@ -71,26 +71,26 @@ export default function LocationWidget() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center gap-2 px-5 py-2.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full text-base font-bold font-serif text-neutral-800 dark:text-neutral-100 shadow-sm w-fit"
+            className="flex items-center gap-3 px-5 py-2.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full text-base font-bold font-serif text-neutral-800 dark:text-neutral-100 shadow-sm w-fit whitespace-nowrap"
         >
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-2">
                 <span>📍</span>
                 <span>Currently working from Panipat, Haryana</span>
             </span>
             <span className="opacity-50">·</span>
             {weather ? (
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-2">
                     <span>{getWeatherIcon(weather.weatherCode)}</span>
                     <span>{weather.temperature}°C</span>
                 </span>
             ) : (
-                <span className="flex items-center gap-1.5 animate-pulse">
+                <span className="flex items-center gap-2 animate-pulse">
                     <span>☁️</span>
                     <span>--°C</span>
                 </span>
             )}
             <span className="opacity-50">·</span>
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-2">
                 <span>🕑</span>
                 <span>{time}</span>
             </span>
