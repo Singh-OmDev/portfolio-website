@@ -21,3 +21,34 @@
     @apply font-serif;
   }
 }
+
+/* Matrix Mode Overrides */
+.matrix-mode body * {
+  color: #0F0 !important;
+  border-color: #0F0 !important;
+  text-shadow: 0 0 5px #0F0;
+  box-shadow: none !important;
+}
+
+/* Add translucent backgrounds to layout elements, but not literally everything */
+.matrix-mode body section,
+.matrix-mode body div:not(.mascot-container),
+.matrix-mode body header,
+.matrix-mode body footer,
+.matrix-mode body nav {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+
+.matrix-mode body {
+  background-color: black !important;
+}
+
+.matrix-mode img {
+  filter: sepia(100%) hue-rotate(90deg) saturate(300%) contrast(150%) brightness(50%) !important;
+}
+
+.matrix-mode .mascot-container {
+  background-color: transparent !important;
+  filter: sepia(100%) hue-rotate(90deg) saturate(500%) contrast(150%) brightness(80%) !important;
+}

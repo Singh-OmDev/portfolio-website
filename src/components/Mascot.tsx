@@ -242,16 +242,41 @@ const Oneko = ({
         };
     }, [targetOffset]);
 
+    const clickCountRef = useRef(0);
+    const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const handleNekoClick = () => {
+        clickCountRef.current += 1;
+
+        if (clickTimeoutRef.current) {
+            clearTimeout(clickTimeoutRef.current);
+        }
+
+        // Reset click count after 2 seconds of inactivity
+        clickTimeoutRef.current = setTimeout(() => {
+            clickCountRef.current = 0;
+        }, 2000);
+
+        if (clickCountRef.current >= 5) {
+            clickCountRef.current = 0;
+            // Dispatch a custom event to notify the parent/app
+            const event = new CustomEvent('matrix-mode-activated');
+            window.dispatchEvent(event);
+        }
+    };
+
     return (
         <div
             ref={nekoRef}
             aria-hidden="true"
+            className="mascot-container"
+            onClick={handleNekoClick}
             style={{
                 width: "32px",
                 height: "32px",
                 position: "fixed",
                 pointerEvents: "auto",
-                cursor: "grab",
+                cursor: "pointer", // Changed to pointer for click affordance
                 imageRendering: "pixelated",
                 left: `${initialPos.x - 16}px`,
                 top: `${initialPos.y - 16}px`,

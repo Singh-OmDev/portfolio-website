@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Playfair_Display, Inter } from "next/font/google"; // Import fonts
 import "./globals.css";
 import Mascot from "@/components/Mascot";
+import MatrixRain from "@/components/MatrixRain";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -9,34 +12,46 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-
-
-
-//service_wsgvkdq serivce id
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Om Singh | Minimal Portfolio",
-  description: "Backend Software Engineer Portfolio",
-  icons: {
-    icon: "/icon.svg",
-  },
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isMatrixMode, setIsMatrixMode] = useState(false);
+
+  useEffect(() => {
+    const handleMatrixActivation = () => {
+      setIsMatrixMode(true);
+      document.documentElement.classList.add("matrix-mode");
+
+      // Turn off after 8 seconds
+      setTimeout(() => {
+        setIsMatrixMode(false);
+        document.documentElement.classList.remove("matrix-mode");
+      }, 8000);
+    };
+
+    window.addEventListener("matrix-mode-activated", handleMatrixActivation);
+    return () => window.removeEventListener("matrix-mode-activated", handleMatrixActivation);
+  }, []);
+
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <title>Om Singh | Minimal Portfolio</title>
+        <meta name="description" content="Backend Software Engineer Portfolio" />
+        <link rel="icon" href="/icon.svg" />
+      </head>
       <body
-        className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 transition-colors duration-300 selection:bg-neutral-200 dark:selection:bg-neutral-800`}
+        className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 transition-colors duration-300 selection:bg-neutral-200 dark:selection:bg-neutral-800 ${isMatrixMode ? "matrix-active" : ""}`}
       >
+        <MatrixRain active={isMatrixMode} />
         <Mascot />
         {children}
       </body>

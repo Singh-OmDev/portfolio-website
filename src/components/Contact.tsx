@@ -214,9 +214,10 @@ export default function Contact() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 }}
-                    className="mt-20 text-center text-neutral-400 text-sm"
+                    className="mt-20 text-center text-neutral-400 text-sm flex flex-col items-center gap-1"
                 >
-                    &copy; {new Date().getFullYear()} Om Singh. All rights reserved.
+                    <p>&copy; {new Date().getFullYear()} Om Singh. All rights reserved.</p>
+                    <p className="text-xs text-neutral-400 dark:text-neutral-500 select-none">What happens if you click the cat 5 times...?</p>
                 </motion.div>
 
             </div>
