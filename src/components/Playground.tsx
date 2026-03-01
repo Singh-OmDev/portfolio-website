@@ -20,10 +20,15 @@ import TracingDemo from "./TracingDemo";
 import SagaPatternDemo from "./SagaPatternDemo";
 import VectorSearchDemo from "./VectorSearchDemo";
 import ServerlessColdStartDemo from "./ServerlessColdStartDemo";
-import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning } from "lucide-react";
+import ShardingDemo from "./ShardingDemo";
+import ServiceMeshDemo from "./ServiceMeshDemo";
+import CdcDemo from "./CdcDemo";
+import BloomFilterDemo from "./BloomFilterDemo";
+import BlueGreenDeployDemo from "./BlueGreenDeployDemo";
+import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -43,6 +48,11 @@ export default function Playground() {
         { id: "saga", label: "Saga Pattern", icon: Network, color: "text-yellow-400", bg: "bg-yellow-400/10" },
         { id: "vector", label: "Vector Search", icon: Brain, color: "text-purple-400", bg: "bg-purple-400/10" },
         { id: "serverless", label: "Serverless", icon: CloudLightning, color: "text-orange-400", bg: "bg-orange-400/10" },
+        { id: "sharding", label: "Database Sharding", icon: Layers, color: "text-blue-500", bg: "bg-blue-500/10" },
+        { id: "mesh", label: "Service Mesh", icon: Shield, color: "text-green-500", bg: "bg-green-500/10" },
+        { id: "cdc", label: "Change Data Capture", icon: DatabaseZap, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+        { id: "bloom", label: "Bloom Filters", icon: Filter, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+        { id: "bluegreen", label: "Blue/Green", icon: SplitSquareHorizontal, color: "text-blue-400", bg: "bg-blue-400/10" },
     ] as const;
 
     const DESCRIPTIONS: Record<string, string> = {
@@ -62,7 +72,12 @@ export default function Playground() {
         trace: "In a Microservice architecture, a single user click might spider out to hit 10 different APIs simultaneously. Datadog/Jaeger-style Distributed Tracing attaches a 'Trace ID' to the request, graphing an exact bottleneck waterfall chart of network latency.",
         saga: "The Saga Pattern manages distributed transactions across multiple microservices. If one service fails in a multi-step workflow (like a payment failure during checkout), compensating transactions are triggered backwards to roll back the previous steps.",
         vector: "Vector Search replaces exact keyword matching by converting text ('dog') into mathematical coordinates (embeddings). When searching, it uses geometry (like K-Nearest Neighbors) to find semantically similar concepts (like 'puppy' or 'pet').",
-        serverless: "Serverless functions automatically scale down to 0 instances when idle to save money. Consequently, the first request sent to a sleeping function incurs a 1-3 second 'Cold Start' latency penalty while the cloud provider provisions a new environment."
+        serverless: "Serverless functions automatically scale down to 0 instances when idle to save money. Consequently, the first request sent to a sleeping function incurs a 1-3 second 'Cold Start' latency penalty while the cloud provider provisions a new environment.",
+        sharding: "Split massive datasets across multiple servers (shards) so no single database node forms a bottleneck. Data is partitioned based on a 'Shard Key' like User ID or Region.",
+        mesh: "A dedicated infrastructure layer that handles secure service-to-service communication, making encryption (mTLS) and retries invisible to the application code.",
+        cdc: "Rather than polling the database for changes (which is slow and resource-heavy), CDC listens to the database's internal transaction log (WAL) and instantly streams every row-level change to downstream systems like Search Indexes or Data Warehouses.",
+        bloom: "A memory-efficient probabilistic data structure used to test if an element is a member of a set. It can definitively tell you 'No', but can only say 'Probably Yes' (false positives are possible, false negatives are not).",
+        bluegreen: "A release pattern that reduces downtime and risk by running two identical production environments. Traffic is gradually shifted to the new environment, allowing for instant zero-downtime rollbacks if issues occur.",
     };
 
     return (
@@ -319,6 +334,61 @@ export default function Playground() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <ServerlessColdStartDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "sharding" && (
+                            <motion.div
+                                key="sharding"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ShardingDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "mesh" && (
+                            <motion.div
+                                key="mesh"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ServiceMeshDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "cdc" && (
+                            <motion.div
+                                key="cdc"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <CdcDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "bloom" && (
+                            <motion.div
+                                key="bloom"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <BloomFilterDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "bluegreen" && (
+                            <motion.div
+                                key="bluegreen"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <BlueGreenDeployDemo />
                             </motion.div>
                         )}
                     </AnimatePresence>
