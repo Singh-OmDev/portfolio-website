@@ -25,10 +25,15 @@ import ServiceMeshDemo from "./ServiceMeshDemo";
 import CdcDemo from "./CdcDemo";
 import BloomFilterDemo from "./BloomFilterDemo";
 import BlueGreenDeployDemo from "./BlueGreenDeployDemo";
-import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal } from "lucide-react";
+import ApiGatewayDemo from "./ApiGatewayDemo";
+import CdnDemo from "./CdnDemo";
+import OAuthDemo from "./OAuthDemo";
+import SnowflakeIdDemo from "./SnowflakeIdDemo";
+import LeaderElectionDemo from "./LeaderElectionDemo";
+import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal, Globe, Lock, UserSquare2 } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen" | "gateway" | "cdn" | "oauth" | "snowflake" | "leader">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -53,6 +58,11 @@ export default function Playground() {
         { id: "cdc", label: "Change Data Capture", icon: DatabaseZap, color: "text-yellow-500", bg: "bg-yellow-500/10" },
         { id: "bloom", label: "Bloom Filters", icon: Filter, color: "text-emerald-500", bg: "bg-emerald-500/10" },
         { id: "bluegreen", label: "Blue/Green", icon: SplitSquareHorizontal, color: "text-blue-400", bg: "bg-blue-400/10" },
+        { id: "gateway", label: "API Gateway", icon: Network, color: "text-indigo-500", bg: "bg-indigo-500/10" },
+        { id: "cdn", label: "CDN (Edge Caches)", icon: Globe, color: "text-blue-500", bg: "bg-blue-500/10" },
+        { id: "oauth", label: "OAuth 2.0 (Code)", icon: Lock, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+        { id: "snowflake", label: "Snowflake ID", icon: Hash, color: "text-indigo-400", bg: "bg-indigo-400/10" },
+        { id: "leader", label: "Leader Election", icon: UserSquare2, color: "text-yellow-500", bg: "bg-yellow-500/10" },
     ] as const;
 
     const DESCRIPTIONS: Record<string, string> = {
@@ -78,6 +88,11 @@ export default function Playground() {
         cdc: "Rather than polling the database for changes (which is slow and resource-heavy), CDC listens to the database's internal transaction log (WAL) and instantly streams every row-level change to downstream systems like Search Indexes or Data Warehouses.",
         bloom: "A memory-efficient probabilistic data structure used to test if an element is a member of a set. It can definitively tell you 'No', but can only say 'Probably Yes' (false positives are possible, false negatives are not).",
         bluegreen: "A release pattern that reduces downtime and risk by running two identical production environments. Traffic is gradually shifted to the new environment, allowing for instant zero-downtime rollbacks if issues occur.",
+        gateway: "An API Gateway is a central entry point for all client requests. It handles cross-cutting concerns like Auth, Rate Limiting, and WAF at the edge, routes requests to internal microservices, and aggregates responses.",
+        cdn: "A Content Delivery Network (CDN) copies static assets directly to servers geographically closest to the user (Edge Nodes). This prevents overseas users from suffering massive cross-ocean latency on every request.",
+        oauth: "The industry-standard protocol for authorization (Auth Code Flow). It allows a Third-Party Application to obtain limited access to a user's account on an HTTP service without the user exposing their password.",
+        snowflake: "In distributed systems, standard auto-incrementing database IDs limit scalability. Snowflake generates unique, roughly-sortable 64-bit IDs independently across thousands of machines without centralized DB coordination.",
+        leader: "In distributed databases, nodes must agree on who handles writes using consensus algorithms. Raft uses a randomized 'Election Timeout' and voting. If a Follower stops hearing heartbeats, it becomes a Candidate and requests votes to become Leader.",
     };
 
     return (
@@ -390,6 +405,21 @@ export default function Playground() {
                             >
                                 <BlueGreenDeployDemo />
                             </motion.div>
+                        )}
+                        {activeTab === "gateway" && (
+                            <motion.div key="gateway" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><ApiGatewayDemo /></motion.div>
+                        )}
+                        {activeTab === "cdn" && (
+                            <motion.div key="cdn" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CdnDemo /></motion.div>
+                        )}
+                        {activeTab === "oauth" && (
+                            <motion.div key="oauth" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><OAuthDemo /></motion.div>
+                        )}
+                        {activeTab === "snowflake" && (
+                            <motion.div key="snowflake" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SnowflakeIdDemo /></motion.div>
+                        )}
+                        {activeTab === "leader" && (
+                            <motion.div key="leader" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><LeaderElectionDemo /></motion.div>
                         )}
                     </AnimatePresence>
                 </div>
