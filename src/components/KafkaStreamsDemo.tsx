@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Database, PlusCircle, ArrowRight, Rss, Layers, Eye, Zap, ArrowRightCircle } from "lucide-react";
 
@@ -11,12 +11,16 @@ export default function KafkaStreamsDemo() {
     const [consumerIdx, setConsumerIdx] = useState<{ analytics: number, billing: number, email: number }>({ analytics: 0, billing: 0, email: 0 });
     const [isRunning, setIsRunning] = useState(false);
 
+    // Keep latest events in ref so intervals don't get canceled and reset every time state changes
+    const eventsRef = useRef(events);
+    useEffect(() => { eventsRef.current = events; }, [events]);
+
     // Producer simulation
     useEffect(() => {
         if (!isRunning) return;
 
         const interval = setInterval(() => {
-            if (events.length > 15) {
+            if (eventsRef.current.length > 15) {
                 setIsRunning(false); // Auto-stop after a bit
                 return;
             }
@@ -32,39 +36,37 @@ export default function KafkaStreamsDemo() {
         }, 1200);
 
         return () => clearInterval(interval);
-    }, [isRunning, events.length]);
+    }, [isRunning]); // No events.length dependency, so interval never resets
 
     // Consumers pulling from log offset independently
     useEffect(() => {
-        if (!isRunning || events.length === 0) return;
-
         // Analytics Consumer (Fast)
-        const anaTimer = setTimeout(() => {
-            if (consumerIdx.analytics < events.length) {
-                setConsumerIdx(prev => ({ ...prev, analytics: prev.analytics + 1 }));
-            }
+        const anaTimer = setInterval(() => {
+            setConsumerIdx(prev => prev.analytics < eventsRef.current.length ? { ...prev, analytics: prev.analytics + 1 } : prev);
         }, 300);
 
         // Billing Consumer (Medium)
-        const bilTimer = setTimeout(() => {
-            if (consumerIdx.billing < events.length) {
-                setConsumerIdx(prev => ({ ...prev, billing: prev.billing + 1 }));
-            }
+        const bilTimer = setInterval(() => {
+            setConsumerIdx(prev => prev.billing < eventsRef.current.length ? { ...prev, billing: prev.billing + 1 } : prev);
         }, 800);
 
         // Email Consumer (Slow/Lagging)
-        const emTimer = setTimeout(() => {
-            if (consumerIdx.email < events.length) {
-                // Randomly pretend to be slow or fail, simulating real-world backpressure
-                if (Math.random() > 0.3) {
-                    setConsumerIdx(prev => ({ ...prev, email: prev.email + 1 }));
+        const emTimer = setInterval(() => {
+            setConsumerIdx(prev => {
+                if (prev.email < eventsRef.current.length) {
+                    // Randomly pretend to be slow or fail, simulating real-world backpressure
+                    if (Math.random() > 0.3) {
+                        return { ...prev, email: prev.email + 1 };
+                    }
                 }
-            }
+                return prev;
+            });
         }, 1500);
 
-        return () => { clearTimeout(anaTimer); clearTimeout(bilTimer); clearTimeout(emTimer); };
+        return () => { clearInterval(anaTimer); clearInterval(bilTimer); clearInterval(emTimer); };
 
-    }, [isRunning, events.length, consumerIdx]);
+    }, []); // No state dependencies! Consumers independently poll forever, just like real Kafka consumers
+
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full min-h-[500px]">
@@ -157,9 +159,9 @@ export default function KafkaStreamsDemo() {
                                         offset:{i}
                                     </span>
                                     <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase ${evt.type === 'USER_SIGNUP' ? 'bg-cyan-500/20 text-cyan-400' :
-                                            evt.type === 'ORDER_PLACED' ? 'bg-indigo-500/20 text-indigo-400' :
-                                                evt.type === 'PAYMENT_SUCCESS' ? 'bg-emerald-500/20 text-emerald-400' :
-                                                    'bg-orange-500/20 text-orange-400'
+                                        evt.type === 'ORDER_PLACED' ? 'bg-indigo-500/20 text-indigo-400' :
+                                            evt.type === 'PAYMENT_SUCCESS' ? 'bg-emerald-500/20 text-emerald-400' :
+                                                'bg-orange-500/20 text-orange-400'
                                         }`}>
                                         {evt.type}
                                     </span>
@@ -175,7 +177,7 @@ export default function KafkaStreamsDemo() {
 
                     <div className="flex flex-col items-center gap-2">
                         <div className="flex items-center gap-1 text-[10px] font-bold text-blue-400 bg-blue-900/20 px-2 py-1 rounded border border-blue-500/30">
-                            <Database size={12} /> Analytcs
+                            <Database size={12} /> Analytics
                         </div>
                         <div className="bg-neutral-800 border border-neutral-700 px-2 py-0.5 rounded text-[10px]">idx: {consumerIdx.analytics}</div>
                     </div>
