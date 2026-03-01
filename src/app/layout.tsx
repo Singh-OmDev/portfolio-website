@@ -43,7 +43,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="dark scroll-smooth">
       <head>
         <title>Om Singh | Minimal Portfolio</title>
         <meta name="description" content="Backend Software Engineer Portfolio" />
@@ -55,7 +55,7 @@ export default function RootLayout({
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         {children}
-                <Analytics />
+        <Analytics />
 
       </body>
     </html>

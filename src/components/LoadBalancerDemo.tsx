@@ -21,7 +21,7 @@ export default function LoadBalancerDemo() {
 
     const handleRequest = () => {
         const timestamp = new Date();
-        const id = Math.random().toString(36).substring(7);
+        const id = crypto.randomUUID();
         const assignedNode = nodes[currentIndex];
 
         // Animate the active node
@@ -54,8 +54,8 @@ export default function LoadBalancerDemo() {
                             <div
                                 key={node}
                                 className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${activeNode === node
-                                        ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                                        : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
+                                    ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                                    : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
                                     }`}
                             >
                                 <div className="flex items-center gap-3">

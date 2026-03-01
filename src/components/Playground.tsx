@@ -2,22 +2,30 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TerminalSquare, Server, Database } from "lucide-react";
+import { TerminalSquare, Server, Database, ListOrdered, ShieldCheck, Activity, Network } from "lucide-react";
 import RateLimiterDemo from "./RateLimiterDemo";
 import LoadBalancerDemo from "./LoadBalancerDemo";
 import CacheDemo from "./CacheDemo";
+import MessageQueueDemo from "./MessageQueueDemo";
+import JwtDemo from "./JwtDemo";
+import CircuitBreakerDemo from "./CircuitBreakerDemo";
+import WebSocketDemo from "./WebSocketDemo";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
         { id: "load", label: "Load Balancer", icon: Server, color: "text-blue-500", bg: "bg-blue-500/10" },
         { id: "cache", label: "Distributed Cache", icon: Database, color: "text-red-500", bg: "bg-red-500/10" },
+        { id: "queue", label: "Message Queue", icon: ListOrdered, color: "text-indigo-500", bg: "bg-indigo-500/10" },
+        { id: "jwt", label: "JWT Auth", icon: ShieldCheck, color: "text-purple-500", bg: "bg-purple-500/10" },
+        { id: "circuit", label: "Circuit Breaker", icon: Activity, color: "text-orange-500", bg: "bg-orange-500/10" },
+        { id: "ws", label: "WebSockets", icon: Network, color: "text-cyan-500", bg: "bg-cyan-500/10" },
     ] as const;
 
     return (
-        <section id="playground" className="py-24 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden">
+        <section id="playground" className="py-12 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-200/10 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
@@ -36,7 +44,7 @@ export default function Playground() {
                         Interactive Architecture
                     </h2>
                     <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-lg leading-relaxed">
-                        Explore core backend concepts visually. Switch between the tabs below to test different mechanisms like rate limiting, load balancing, and caching.
+                        Explore core backend concepts visually. Switch between the tabs below to test different mechanisms like rate limiting, load balancing, caching, and more.
                     </p>
                 </motion.div>
 
@@ -48,10 +56,10 @@ export default function Playground() {
                         return (
                             <button
                                 key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${isActive
-                                        ? `bg-white dark:bg-neutral-800 shadow-md ${tab.color} border border-neutral-200 dark:border-neutral-700`
-                                        : "bg-neutral-100 dark:bg-neutral-900/50 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300 border border-transparent"
+                                onClick={() => setActiveTab(tab.id as any)}
+                                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer ${isActive
+                                    ? `bg-white dark:bg-neutral-800 shadow-md ${tab.color} border border-neutral-200 dark:border-neutral-700`
+                                    : "bg-neutral-100 dark:bg-neutral-900/50 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300 border border-transparent"
                                     }`}
                             >
                                 <div className={`p-1.5 rounded-md ${isActive ? tab.bg : "bg-transparent"}`}>
@@ -97,6 +105,50 @@ export default function Playground() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <CacheDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "queue" && (
+                            <motion.div
+                                key="queue"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <MessageQueueDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "jwt" && (
+                            <motion.div
+                                key="jwt"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <JwtDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "circuit" && (
+                            <motion.div
+                                key="circuit"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <CircuitBreakerDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "ws" && (
+                            <motion.div
+                                key="ws"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WebSocketDemo />
                             </motion.div>
                         )}
                     </AnimatePresence>

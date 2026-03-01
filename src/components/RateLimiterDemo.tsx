@@ -29,7 +29,7 @@ export default function RateLimiterDemo() {
 
     const handleRequest = () => {
         const timestamp = new Date();
-        const id = Math.random().toString(36).substring(7);
+        const id = crypto.randomUUID();
 
         if (tokens > 0) {
             setTokens((prev) => prev - 1);
