@@ -104,7 +104,7 @@ export default function MessageQueueDemo() {
                 {/* Publish Button */}
                 <button
                     onClick={publishMessage}
-                    className="w-full bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                    className="w-full bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
                 >
                     <Send size={18} />
                     <span>Publish Event</span>

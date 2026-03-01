@@ -109,7 +109,7 @@ export default function IdempotencyDemo() {
                             <button
                                 onClick={processPayment}
                                 disabled={isProcessing}
-                                className="w-full bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black py-3.5 rounded-xl font-medium shadow-sm active:scale-95 transition-all flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black py-3.5 rounded-xl font-medium shadow-sm active:scale-95 transition-all flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                             >
                                 {isProcessing ? <Zap size={18} className="animate-pulse text-yellow-400" /> : <CreditCard size={18} />}
                                 {isProcessing ? "Processing..." : "Pay $100.00"}
@@ -118,7 +118,7 @@ export default function IdempotencyDemo() {
                     </div>
                 </div>
 
-                <button onClick={resetTransaction} className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors underline decoration-neutral-300 dark:decoration-neutral-700">
+                <button onClick={resetTransaction} className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors underline decoration-neutral-300 dark:decoration-neutral-700 cursor-pointer">
                     Start New Transaction
                 </button>
             </div>

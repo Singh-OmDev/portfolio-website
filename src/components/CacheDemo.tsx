@@ -57,10 +57,10 @@ export default function CacheDemo() {
                     <div className="space-y-4 mb-8">
                         {/* Redis Node */}
                         <div className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${status === "fetching_cache"
-                                ? "bg-red-50 dark:bg-red-900/20 border-red-400 dark:border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-                                : isCached
-                                    ? "bg-red-50/50 dark:bg-red-900/10 border-red-200 dark:border-red-800/50"
-                                    : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
+                            ? "bg-red-50 dark:bg-red-900/20 border-red-400 dark:border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                            : isCached
+                                ? "bg-red-50/50 dark:bg-red-900/10 border-red-200 dark:border-red-800/50"
+                                : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
                             }`}>
                             <div className="flex items-center gap-3">
                                 <Zap size={18} className={isCached ? "text-red-500" : "text-neutral-400"} />
@@ -72,8 +72,8 @@ export default function CacheDemo() {
 
                         {/* Postgres Node */}
                         <div className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${status === "fetching_db"
-                                ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                                : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
+                            ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                            : "bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700"
                             }`}>
                             <div className="flex items-center gap-3">
                                 <Database size={18} className={status === "fetching_db" ? "text-blue-500" : "text-neutral-400"} />
@@ -89,7 +89,7 @@ export default function CacheDemo() {
                 <button
                     onClick={handleFetch}
                     disabled={status === "fetching_db" || status === "fetching_cache"}
-                    className="w-full relative group overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full relative group overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                 >
                     {(status === "idle" || status === "done") && (
                         <>

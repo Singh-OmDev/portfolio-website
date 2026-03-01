@@ -14,9 +14,13 @@ import ConnectionPoolDemo from "./ConnectionPoolDemo";
 import IdempotencyDemo from "./IdempotencyDemo";
 import HashingDemo from "./HashingDemo";
 import GraphqlDemo from "./GraphqlDemo";
+import ReplicationDemo from "./ReplicationDemo";
+import EventSourcingDemo from "./EventSourcingDemo";
+import TracingDemo from "./TracingDemo";
+import { GitBranch, Fingerprint, BarChart } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -30,6 +34,9 @@ export default function Playground() {
         { id: "idempotency", label: "API Idempotency", icon: CreditCard, color: "text-yellow-500", bg: "bg-yellow-500/10" },
         { id: "hash", label: "Consistent Hashing", icon: Hash, color: "text-emerald-500", bg: "bg-emerald-500/10" },
         { id: "graphql", label: "GraphQL vs REST", icon: ArrowRightCircle, color: "text-[#E10098]", bg: "bg-[#E10098]/10" },
+        { id: "replication", label: "DB Replication", icon: GitBranch, color: "text-blue-400", bg: "bg-blue-400/10" },
+        { id: "events", label: "Event Sourcing", icon: Fingerprint, color: "text-rose-400", bg: "bg-rose-400/10" },
+        { id: "trace", label: "Distributed Tracing", icon: BarChart, color: "text-indigo-400", bg: "bg-indigo-400/10" },
     ] as const;
 
     const DESCRIPTIONS: Record<string, string> = {
@@ -43,7 +50,10 @@ export default function Playground() {
         pool: "Opening a connection to a database is an astronomically heavy network process. Connection Pools pre-open a fixed amount of connections across a cluster. When high traffic hits, queries wait in line for an active connection to become free, preventing crashes.",
         idempotency: "In flaky distributed systems, users often submit payments twice. An Idempotency system assigns a unique cryptographic key to a given checkout transaction. If the user hits 'Pay' a second time while it's processing, the cache hits successfully and protects them from being double-charged.",
         hash: "In massive scale deployments, Consistent Hashing determines which server node owns which specific piece of data. If you add or remove nodes dynamically, the ring guarantees that only an absolute minimum fraction of data needs to be reshuffled across the network.",
-        graphql: "REST APIs suffer from the 'N+1 Waterfall' problem—you have to wait for the first request to finish before triggering the second. GraphQL elegantly allows the client to request precisely all the nested data it needs in a single trip."
+        graphql: "REST APIs suffer from the 'N+1 Waterfall' problem—you have to wait for the first request to finish before triggering the second. GraphQL elegantly allows the client to request precisely all the nested data it needs in a single trip.",
+        replication: "Scale dictates that a single Database cannot handle all SELECT and INSERT traffic. We separate the architecture into a 'Leader' database that only takes heavy writes, and asynchronously replicates that state to multiple read-only 'Follower' databases.",
+        events: "Instead of storing a volatile state like 'Current Balance: $50', CQRS Event Sourcing stores an immutable, append-only JSON log of every transaction ever made. The system dynamically reads the logs to project a state, allowing developers to literally 'Rewind Time'.",
+        trace: "In a Microservice architecture, a single user click might spider out to hit 10 different APIs simultaneously. Datadog/Jaeger-style Distributed Tracing attaches a 'Trace ID' to the request, graphing an exact bottleneck waterfall chart of network latency."
     };
 
     return (
@@ -234,6 +244,39 @@ export default function Playground() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <GraphqlDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "replication" && (
+                            <motion.div
+                                key="replication"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ReplicationDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "events" && (
+                            <motion.div
+                                key="events"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <EventSourcingDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "trace" && (
+                            <motion.div
+                                key="trace"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <TracingDemo />
                             </motion.div>
                         )}
                     </AnimatePresence>

@@ -102,7 +102,7 @@ export default function CircuitBreakerDemo() {
                         </div>
                         <button
                             onClick={toggleService}
-                            className={`w-full py-2.5 rounded-lg border text-sm font-medium transition-colors flex items-center justify-center gap-2
+                            className={`w-full py-2.5 rounded-lg border text-sm font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer
                                 ${serviceHealthy
                                     ? 'border-red-500/50 text-red-600 hover:bg-red-50 dark:hover:bg-red-950'
                                     : 'border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950'
@@ -117,7 +117,7 @@ export default function CircuitBreakerDemo() {
                 {/* Fire Request Button */}
                 <button
                     onClick={sendRequest}
-                    className="w-full relative overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                    className="w-full relative overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
                 >
                     <RefreshCw size={18} />
                     <span>Send Request</span>

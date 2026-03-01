@@ -85,7 +85,7 @@ export default function RateLimiterDemo() {
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                     style={isHovering && tokens > 0 ? { transform: "translateY(-2px)" } : {}}
-                    className="w-full relative group overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                    className="w-full relative group overflow-hidden bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-full font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl cursor-pointer"
                 >
                     <Zap size={18} className={`${isHovering && tokens > 0 ? "animate-pulse text-yellow-500 dark:text-yellow-600" : ""}`} />
                     <span className="relative z-10">Send API Request</span>

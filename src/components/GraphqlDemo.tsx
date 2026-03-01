@@ -60,7 +60,7 @@ export default function GraphqlDemo() {
                 <button
                     onClick={startRace}
                     disabled={isFetching && restProgress < 3}
-                    className="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+                    className="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                     <RefreshCcw size={16} className={isFetching && restProgress < 3 ? "animate-spin" : ""} />
                     {isFetching && restProgress < 3 ? "Fetching..." : "Run Benchmark"}

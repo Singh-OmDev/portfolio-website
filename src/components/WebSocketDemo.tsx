@@ -98,7 +98,7 @@ export default function WebSocketDemo() {
                             <button
                                 onClick={handleConnect}
                                 disabled={isConnecting}
-                                className="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                className="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
                             >
                                 {isConnecting ? "Negotiating..." : "Initiate Handshake"}
                             </button>
@@ -109,7 +109,7 @@ export default function WebSocketDemo() {
                         <div className="mb-8 flex flex-col items-center justify-center p-6 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-neutral-50 dark:bg-neutral-900/50">
                             <button
                                 onClick={handleDisconnect}
-                                className="px-6 py-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-50 dark:hover:bg-red-950 font-medium transition-colors text-sm"
+                                className="px-6 py-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-50 dark:hover:bg-red-950 font-medium transition-colors text-sm cursor-pointer"
                             >
                                 Close Connection
                             </button>
@@ -130,7 +130,7 @@ export default function WebSocketDemo() {
                     <button
                         type="submit"
                         disabled={!isConnected || !inputValue.trim()}
-                        className="absolute right-2 top-2 bottom-2 aspect-square bg-indigo-500 text-white rounded-full flex items-center justify-center hover:bg-indigo-600 disabled:opacity-50 disabled:hover:bg-indigo-500 transition-colors"
+                        className="absolute right-2 top-2 bottom-2 aspect-square bg-indigo-500 text-white rounded-full flex items-center justify-center hover:bg-indigo-600 disabled:opacity-50 disabled:hover:bg-indigo-500 disabled:cursor-not-allowed transition-colors cursor-pointer"
                     >
                         <Send size={16} className="-ml-0.5" />
                     </button>

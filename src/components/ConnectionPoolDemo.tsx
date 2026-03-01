@@ -123,7 +123,7 @@ export default function ConnectionPoolDemo() {
                     <div className="flex gap-4 mb-8">
                         <button
                             onClick={spikeTraffic}
-                            className="flex-1 bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-xl font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                            className="flex-1 bg-neutral-900 dark:bg-white text-white dark:text-black py-4 px-6 rounded-xl font-medium transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer"
                         >
                             <Activity size={18} />
                             Spike Traffic (15 reqs)
@@ -138,7 +138,7 @@ export default function ConnectionPoolDemo() {
                         </div>
                         <div className="p-4 rounded-xl border border-red-200 dark:border-red-900/30 bg-red-50 dark:bg-red-950/20 flex flex-col gap-1 relative overflow-hidden group">
                             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onClick={clearStats} className="text-[10px] text-red-400 hover:text-red-500 underline">reset</button>
+                                <button onClick={clearStats} className="text-[10px] text-red-400 hover:text-red-500 underline cursor-pointer">reset</button>
                             </div>
                             <span className="text-xs text-red-600 dark:text-red-400 uppercase font-bold tracking-wider flex items-center gap-1"><ServerCrash size={12} /> Dropped</span>
                             <span className="text-2xl font-mono text-red-600 dark:text-red-400">{stats.dropped}</span>

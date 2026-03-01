@@ -89,7 +89,7 @@ export default function HashingDemo() {
                     <button
                         onClick={addNode}
                         disabled={nodes.length >= 6}
-                        className="w-full py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-50"
+                        className="w-full py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                         <Plus size={16} /> Add Server Node
                     </button>
