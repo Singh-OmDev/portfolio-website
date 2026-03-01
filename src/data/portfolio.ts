@@ -48,7 +48,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
             items: ["Docker", "AWS", "Vercel", "Git", "Postman"],
         },
         {
-            category: "Frontend (Working Knowledge)",
+            category: "Frontend",
             items: ["React.js", "Next.js", "Redux Toolkit", "Tailwind CSS"],
         },
         {

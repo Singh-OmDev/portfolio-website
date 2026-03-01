@@ -17,10 +17,13 @@ import GraphqlDemo from "./GraphqlDemo";
 import ReplicationDemo from "./ReplicationDemo";
 import EventSourcingDemo from "./EventSourcingDemo";
 import TracingDemo from "./TracingDemo";
-import { GitBranch, Fingerprint, BarChart } from "lucide-react";
+import SagaPatternDemo from "./SagaPatternDemo";
+import VectorSearchDemo from "./VectorSearchDemo";
+import ServerlessColdStartDemo from "./ServerlessColdStartDemo";
+import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -37,6 +40,9 @@ export default function Playground() {
         { id: "replication", label: "DB Replication", icon: GitBranch, color: "text-blue-400", bg: "bg-blue-400/10" },
         { id: "events", label: "Event Sourcing", icon: Fingerprint, color: "text-rose-400", bg: "bg-rose-400/10" },
         { id: "trace", label: "Distributed Tracing", icon: BarChart, color: "text-indigo-400", bg: "bg-indigo-400/10" },
+        { id: "saga", label: "Saga Pattern", icon: Network, color: "text-yellow-400", bg: "bg-yellow-400/10" },
+        { id: "vector", label: "Vector Search", icon: Brain, color: "text-purple-400", bg: "bg-purple-400/10" },
+        { id: "serverless", label: "Serverless", icon: CloudLightning, color: "text-orange-400", bg: "bg-orange-400/10" },
     ] as const;
 
     const DESCRIPTIONS: Record<string, string> = {
@@ -53,7 +59,10 @@ export default function Playground() {
         graphql: "REST APIs suffer from the 'N+1 Waterfall' problem—you have to wait for the first request to finish before triggering the second. GraphQL elegantly allows the client to request precisely all the nested data it needs in a single trip.",
         replication: "Scale dictates that a single Database cannot handle all SELECT and INSERT traffic. We separate the architecture into a 'Leader' database that only takes heavy writes, and asynchronously replicates that state to multiple read-only 'Follower' databases.",
         events: "Instead of storing a volatile state like 'Current Balance: $50', CQRS Event Sourcing stores an immutable, append-only JSON log of every transaction ever made. The system dynamically reads the logs to project a state, allowing developers to literally 'Rewind Time'.",
-        trace: "In a Microservice architecture, a single user click might spider out to hit 10 different APIs simultaneously. Datadog/Jaeger-style Distributed Tracing attaches a 'Trace ID' to the request, graphing an exact bottleneck waterfall chart of network latency."
+        trace: "In a Microservice architecture, a single user click might spider out to hit 10 different APIs simultaneously. Datadog/Jaeger-style Distributed Tracing attaches a 'Trace ID' to the request, graphing an exact bottleneck waterfall chart of network latency.",
+        saga: "The Saga Pattern manages distributed transactions across multiple microservices. If one service fails in a multi-step workflow (like a payment failure during checkout), compensating transactions are triggered backwards to roll back the previous steps.",
+        vector: "Vector Search replaces exact keyword matching by converting text ('dog') into mathematical coordinates (embeddings). When searching, it uses geometry (like K-Nearest Neighbors) to find semantically similar concepts (like 'puppy' or 'pet').",
+        serverless: "Serverless functions automatically scale down to 0 instances when idle to save money. Consequently, the first request sent to a sleeping function incurs a 1-3 second 'Cold Start' latency penalty while the cloud provider provisions a new environment."
     };
 
     return (
@@ -277,6 +286,39 @@ export default function Playground() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <TracingDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "saga" && (
+                            <motion.div
+                                key="saga"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <SagaPatternDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "vector" && (
+                            <motion.div
+                                key="vector"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <VectorSearchDemo />
+                            </motion.div>
+                        )}
+                        {activeTab === "serverless" && (
+                            <motion.div
+                                key="serverless"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ServerlessColdStartDemo />
                             </motion.div>
                         )}
                     </AnimatePresence>
