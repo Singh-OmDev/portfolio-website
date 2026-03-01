@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TerminalSquare, Server, Database, ListOrdered, ShieldCheck, Activity, Network, Users, CreditCard, Hash, ArrowRightCircle, Info } from "lucide-react";
 import RateLimiterDemo from "./RateLimiterDemo";
 import LoadBalancerDemo from "./LoadBalancerDemo";
 import CacheDemo from "./CacheDemo";
@@ -30,10 +29,21 @@ import CdnDemo from "./CdnDemo";
 import OAuthDemo from "./OAuthDemo";
 import SnowflakeIdDemo from "./SnowflakeIdDemo";
 import LeaderElectionDemo from "./LeaderElectionDemo";
-import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal, Globe, Lock, UserSquare2 } from "lucide-react";
+import GossipProtocolDemo from "./GossipProtocolDemo";
+import TwoPhaseCommitDemo from "./TwoPhaseCommitDemo";
+import MerkleTreeDemo from "./MerkleTreeDemo";
+import GeohashingDemo from "./GeohashingDemo";
+import MapReduceDemo from "./MapReduceDemo";
+import DatabaseIndexingDemo from "./DatabaseIndexingDemo";
+import DnsResolutionDemo from "./DnsResolutionDemo";
+import SseDemo from "./SseDemo";
+import EncryptionDemo from "./EncryptionDemo";
+import CapTheoremDemo from "./CapTheoremDemo";
+import KafkaStreamsDemo from "./KafkaStreamsDemo";
+import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal, Globe, Lock, UserSquare2, MessageCircle, ShieldCheck, GitMerge, Map, Blocks, TerminalSquare, Server, Database, ListOrdered, Activity, Network, Users, CreditCard, Hash, ArrowRightCircle, Info, Binary, Zap, ShieldAlert } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen" | "gateway" | "cdn" | "oauth" | "snowflake" | "leader">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen" | "gateway" | "cdn" | "oauth" | "snowflake" | "leader" | "gossip" | "twopc" | "merkle" | "geohash" | "mapreduce" | "btree" | "dns" | "sse" | "encrypt" | "cap" | "kafka">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -63,6 +73,17 @@ export default function Playground() {
         { id: "oauth", label: "OAuth 2.0 (Code)", icon: Lock, color: "text-emerald-500", bg: "bg-emerald-500/10" },
         { id: "snowflake", label: "Snowflake ID", icon: Hash, color: "text-indigo-400", bg: "bg-indigo-400/10" },
         { id: "leader", label: "Leader Election", icon: UserSquare2, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+        { id: "gossip", label: "Gossip Protocol", icon: MessageCircle, color: "text-purple-400", bg: "bg-purple-400/10" },
+        { id: "twopc", label: "2-Phase Commit", icon: ShieldCheck, color: "text-green-500", bg: "bg-green-500/10" },
+        { id: "merkle", label: "Merkle Trees", icon: GitMerge, color: "text-emerald-400", bg: "bg-emerald-400/10" },
+        { id: "geohash", label: "Geohashing", icon: Map, color: "text-blue-400", bg: "bg-blue-400/10" },
+        { id: "mapreduce", label: "MapReduce", icon: Blocks, color: "text-orange-500", bg: "bg-orange-500/10" },
+        { id: "btree", label: "DB Indexing (B-Tree)", icon: Binary, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+        { id: "dns", label: "DNS Resolution", icon: Globe, color: "text-indigo-400", bg: "bg-indigo-400/10" },
+        { id: "sse", label: "SSE vs Polling", icon: Zap, color: "text-yellow-400", bg: "bg-yellow-400/10" },
+        { id: "encrypt", label: "Cryptography", icon: Lock, color: "text-rose-500", bg: "bg-rose-500/10" },
+        { id: "cap", label: "CAP Theorem", icon: ShieldAlert, color: "text-purple-500", bg: "bg-purple-500/10" },
+        { id: "kafka", label: "Event Streams", icon: Layers, color: "text-emerald-400", bg: "bg-emerald-400/10" },
     ] as const;
 
     const DESCRIPTIONS: Record<string, string> = {
@@ -93,6 +114,17 @@ export default function Playground() {
         oauth: "The industry-standard protocol for authorization (Auth Code Flow). It allows a Third-Party Application to obtain limited access to a user's account on an HTTP service without the user exposing their password.",
         snowflake: "In distributed systems, standard auto-incrementing database IDs limit scalability. Snowflake generates unique, roughly-sortable 64-bit IDs independently across thousands of machines without centralized DB coordination.",
         leader: "In distributed databases, nodes must agree on who handles writes using consensus algorithms. Raft uses a randomized 'Election Timeout' and voting. If a Follower stops hearing heartbeats, it becomes a Candidate and requests votes to become Leader.",
+        gossip: "Masterless distributed databases (like Cassandra) don't have a central leader. Instead, nodes randomly select a peer every second to 'gossip' with, trading state updates. Like a viral infection, data synchronizes exponentially fast.",
+        twopc: "A distributed algorithm that ensures all nodes in a cluster commit a transaction... or none do. It prevents partial writes, ensuring ACID properties. Unlike the Saga Pattern which compensates after failures, 2PC locks everything first.",
+        merkle: "How do databases quickly check if millions of rows are out of sync without comparing raw gigabytes of data? They build a tree of Hashes. If a single row changes at the bottom, the single 'Root Hash' at the top changes instantly.",
+        geohash: "How do Uber or Tinder find people near you without calculating the math distance between every single user? They chop the world map into a grid, assigning a short string to each square for ultra-fast spatial indexing.",
+        mapreduce: "How do you process 50 Terabytes of text? You can't fit it on one machine. MapReduce splits the data, maps (transforms) chunks in parallel across hundreds of workers, shuffles identical keys, and reduces them into a final answer.",
+        btree: "If you don't use an Index, searching for a row requires a Full Table Scan (checking every single row). An Index builds a balanced B-Tree structure in memory, allowing logarithmic O(log n) lookups.",
+        dns: "What happens when you type google.com into your browser? Computers only understand IP addresses. The Domain Name System (DNS) is the phonebook of the internet, recursively querying servers across the globe to find an address.",
+        sse: "Polling wastes CPU/Bandwidth. Long Polling holds connections open but still requires reconnection. SSE (Server-Sent Events) keeps a single persistent HTTP connection open, allowing the server to push data downward anytime.",
+        encrypt: "Symmetric encryption uses the same key to lock and unlock data. Asymmetric encryption uses a mathematically linked Public/Private key pair. Anyone can lock data with the Public Key, but only the Private Key can unlock it.",
+        cap: "In a distributed data store, you can only guarantee two out of three: Consistency, Availability, or Partition Tolerance. Since networks always fail (P is mandatory), you must choose between CP (errors on disconnect) or AP (serves stale data).",
+        kafka: "Unlike traditional databases that overwrite state, Kafka is an Append-Only Log. Producers blindly dump events onto the end of the log. Independent Consumers read the log at their own pace, tracking their own 'Offset'.",
     };
 
     return (
@@ -420,6 +452,39 @@ export default function Playground() {
                         )}
                         {activeTab === "leader" && (
                             <motion.div key="leader" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><LeaderElectionDemo /></motion.div>
+                        )}
+                        {activeTab === "gossip" && (
+                            <motion.div key="gossip" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GossipProtocolDemo /></motion.div>
+                        )}
+                        {activeTab === "twopc" && (
+                            <motion.div key="twopc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><TwoPhaseCommitDemo /></motion.div>
+                        )}
+                        {activeTab === "merkle" && (
+                            <motion.div key="merkle" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MerkleTreeDemo /></motion.div>
+                        )}
+                        {activeTab === "geohash" && (
+                            <motion.div key="geohash" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GeohashingDemo /></motion.div>
+                        )}
+                        {activeTab === "mapreduce" && (
+                            <motion.div key="mapreduce" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MapReduceDemo /></motion.div>
+                        )}
+                        {activeTab === "btree" && (
+                            <motion.div key="btree" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DatabaseIndexingDemo /></motion.div>
+                        )}
+                        {activeTab === "dns" && (
+                            <motion.div key="dns" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DnsResolutionDemo /></motion.div>
+                        )}
+                        {activeTab === "sse" && (
+                            <motion.div key="sse" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SseDemo /></motion.div>
+                        )}
+                        {activeTab === "encrypt" && (
+                            <motion.div key="encrypt" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><EncryptionDemo /></motion.div>
+                        )}
+                        {activeTab === "cap" && (
+                            <motion.div key="cap" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CapTheoremDemo /></motion.div>
+                        )}
+                        {activeTab === "kafka" && (
+                            <motion.div key="kafka" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><KafkaStreamsDemo /></motion.div>
                         )}
                     </AnimatePresence>
                 </div>
