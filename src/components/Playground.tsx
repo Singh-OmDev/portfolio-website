@@ -99,7 +99,7 @@ export default function Playground() {
                     <h2 className="text-4xl md:text-5xl font-serif font-medium mb-6 text-neutral-900 dark:text-neutral-50 tracking-tight">
                         Interactive Architecture
                     </h2>
-                    <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-lg leading-relaxed">
+                    <p className="text-neutral-800 dark:text-neutral-200 max-w-xl mx-auto text-lg font-medium leading-relaxed">
                         Explore core backend concepts visually. Switch between the tabs below to test different mechanisms like rate limiting, load balancing, caching, and more.
                     </p>
                 </motion.div>
@@ -138,8 +138,8 @@ export default function Playground() {
                             transition={{ duration: 0.2 }}
                             className="bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 flex gap-4 items-start shadow-sm"
                         >
-                            <Info size={20} className="text-neutral-400 shrink-0 mt-0.5" />
-                            <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                            <Info size={22} className="text-indigo-500 dark:text-indigo-400 shrink-0 mt-0.5" />
+                            <p className="text-base font-semibold text-neutral-800 dark:text-neutral-100 leading-relaxed">
                                 {DESCRIPTIONS[activeTab]}
                             </p>
                         </motion.div>
