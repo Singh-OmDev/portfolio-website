@@ -132,7 +132,7 @@ export default function Playground() {
             {/* Background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-200/10 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
-            <div className="max-w-5xl w-full">
+            <div className="max-w-6xl mx-auto w-full">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -147,346 +147,353 @@ export default function Playground() {
                         Interactive Architecture
                     </h2>
                     <p className="text-neutral-800 dark:text-neutral-200 max-w-xl mx-auto text-lg font-medium leading-relaxed">
-                        Explore core backend concepts visually. Switch between the tabs below to test different mechanisms like rate limiting, load balancing, caching, and more.
+                        Explore core backend concepts visually. Select a mechanism from the menu to test concepts like rate limiting, load balancing, caching, and more.
                     </p>
                 </motion.div>
 
-                {/* Tabs */}
-                <div className="flex flex-wrap justify-center gap-2 mb-12">
-                    {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        const isActive = activeTab === tab.id;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id as any)}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer ${isActive
-                                    ? `bg-white dark:bg-neutral-800 shadow-md ${tab.color} border border-neutral-200 dark:border-neutral-700`
-                                    : "bg-neutral-100 dark:bg-neutral-900/50 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300 border border-transparent"
-                                    }`}
-                            >
-                                <div className={`p-1.5 rounded-md ${isActive ? tab.bg : "bg-transparent"}`}>
-                                    <Icon size={16} />
-                                </div>
-                                {tab.label}
-                            </button>
-                        );
-                    })}
-                </div>
+                <div className="flex flex-col lg:flex-row gap-4 xl:gap-8 items-start justify-center">
+                    {/* Sidebar Tabs */}
+                    <aside className="w-full lg:w-64 shrink-0 lg:sticky lg:top-24 z-20">
+                        <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto lg:max-h-[75vh] pb-4 lg:pb-0 lg:pr-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                            {tabs.map((tab) => {
+                                const Icon = tab.icon;
+                                const isActive = activeTab === tab.id;
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id as any)}
+                                        className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 cursor-pointer whitespace-nowrap lg:whitespace-normal text-left w-full ${isActive
+                                            ? `bg-white dark:bg-neutral-800 shadow-sm ${tab.color} border border-neutral-200/50 dark:border-neutral-700/50`
+                                            : "bg-transparent text-neutral-500 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-neutral-300 border border-transparent"
+                                            }`}
+                                    >
+                                        <div className={`p-1.5 rounded-lg shrink-0 ${isActive ? tab.bg : "bg-neutral-100 dark:bg-neutral-800"}`}>
+                                            <Icon size={16} className={isActive ? "" : "opacity-70"} />
+                                        </div>
+                                        <span className="text-[13px] leading-tight">{tab.label}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </aside>
 
-                {/* Demo Descriptions */}
-                <div className="mb-8 w-full">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0, y: 5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -5 }}
-                            transition={{ duration: 0.2 }}
-                            className="bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 flex gap-4 items-start shadow-sm"
-                        >
-                            <Info size={22} className="text-indigo-500 dark:text-indigo-400 shrink-0 mt-0.5" />
-                            <p className="text-base font-semibold text-neutral-800 dark:text-neutral-100 leading-relaxed">
-                                {DESCRIPTIONS[activeTab]}
-                            </p>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
+                    {/* Main Content Area */}
+                    <div className="flex-1 min-w-0 w-full">
+                        {/* Demo Descriptions */}
+                        <div className="mb-8 w-full">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeTab}
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -5 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="bg-neutral-50/80 dark:bg-neutral-900/40 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-800/50 rounded-2xl p-6 flex gap-4 items-start shadow-sm"
+                                >
+                                    <Info size={22} className="text-indigo-500 dark:text-indigo-400 shrink-0 mt-0.5" />
+                                    <p className="text-[15px] font-medium text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                                        {DESCRIPTIONS[activeTab]}
+                                    </p>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
 
-                {/* Demo Container */}
-                <div className="relative min-h-[500px]">
-                    <AnimatePresence mode="wait">
-                        {activeTab === "rate" && (
-                            <motion.div
-                                key="rate"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <RateLimiterDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "load" && (
-                            <motion.div
-                                key="load"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <LoadBalancerDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "cache" && (
-                            <motion.div
-                                key="cache"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <CacheDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "queue" && (
-                            <motion.div
-                                key="queue"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <MessageQueueDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "jwt" && (
-                            <motion.div
-                                key="jwt"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <JwtDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "circuit" && (
-                            <motion.div
-                                key="circuit"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <CircuitBreakerDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "ws" && (
-                            <motion.div
-                                key="ws"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <WebSocketDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "pool" && (
-                            <motion.div
-                                key="pool"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ConnectionPoolDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "idempotency" && (
-                            <motion.div
-                                key="idempotency"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <IdempotencyDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "hash" && (
-                            <motion.div
-                                key="hash"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <HashingDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "graphql" && (
-                            <motion.div
-                                key="graphql"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <GraphqlDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "replication" && (
-                            <motion.div
-                                key="replication"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ReplicationDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "events" && (
-                            <motion.div
-                                key="events"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <EventSourcingDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "trace" && (
-                            <motion.div
-                                key="trace"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <TracingDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "saga" && (
-                            <motion.div
-                                key="saga"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <SagaPatternDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "vector" && (
-                            <motion.div
-                                key="vector"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <VectorSearchDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "serverless" && (
-                            <motion.div
-                                key="serverless"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ServerlessColdStartDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "sharding" && (
-                            <motion.div
-                                key="sharding"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ShardingDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "mesh" && (
-                            <motion.div
-                                key="mesh"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ServiceMeshDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "cdc" && (
-                            <motion.div
-                                key="cdc"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <CdcDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "bloom" && (
-                            <motion.div
-                                key="bloom"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <BloomFilterDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "bluegreen" && (
-                            <motion.div
-                                key="bluegreen"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <BlueGreenDeployDemo />
-                            </motion.div>
-                        )}
-                        {activeTab === "gateway" && (
-                            <motion.div key="gateway" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><ApiGatewayDemo /></motion.div>
-                        )}
-                        {activeTab === "cdn" && (
-                            <motion.div key="cdn" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CdnDemo /></motion.div>
-                        )}
-                        {activeTab === "oauth" && (
-                            <motion.div key="oauth" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><OAuthDemo /></motion.div>
-                        )}
-                        {activeTab === "snowflake" && (
-                            <motion.div key="snowflake" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SnowflakeIdDemo /></motion.div>
-                        )}
-                        {activeTab === "leader" && (
-                            <motion.div key="leader" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><LeaderElectionDemo /></motion.div>
-                        )}
-                        {activeTab === "gossip" && (
-                            <motion.div key="gossip" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GossipProtocolDemo /></motion.div>
-                        )}
-                        {activeTab === "twopc" && (
-                            <motion.div key="twopc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><TwoPhaseCommitDemo /></motion.div>
-                        )}
-                        {activeTab === "merkle" && (
-                            <motion.div key="merkle" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MerkleTreeDemo /></motion.div>
-                        )}
-                        {activeTab === "geohash" && (
-                            <motion.div key="geohash" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GeohashingDemo /></motion.div>
-                        )}
-                        {activeTab === "mapreduce" && (
-                            <motion.div key="mapreduce" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MapReduceDemo /></motion.div>
-                        )}
-                        {activeTab === "btree" && (
-                            <motion.div key="btree" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DatabaseIndexingDemo /></motion.div>
-                        )}
-                        {activeTab === "dns" && (
-                            <motion.div key="dns" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DnsResolutionDemo /></motion.div>
-                        )}
-                        {activeTab === "sse" && (
-                            <motion.div key="sse" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SseDemo /></motion.div>
-                        )}
-                        {activeTab === "encrypt" && (
-                            <motion.div key="encrypt" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><EncryptionDemo /></motion.div>
-                        )}
-                        {activeTab === "cap" && (
-                            <motion.div key="cap" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CapTheoremDemo /></motion.div>
-                        )}
-                        {activeTab === "kafka" && (
-                            <motion.div key="kafka" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><KafkaStreamsDemo /></motion.div>
-                        )}
-                    </AnimatePresence>
+                        {/* Demo Container */}
+                        <div className="relative min-h-[500px] w-full">
+                            <AnimatePresence mode="wait">
+                                {activeTab === "rate" && (
+                                    <motion.div
+                                        key="rate"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <RateLimiterDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "load" && (
+                                    <motion.div
+                                        key="load"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <LoadBalancerDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "cache" && (
+                                    <motion.div
+                                        key="cache"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <CacheDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "queue" && (
+                                    <motion.div
+                                        key="queue"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <MessageQueueDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "jwt" && (
+                                    <motion.div
+                                        key="jwt"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <JwtDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "circuit" && (
+                                    <motion.div
+                                        key="circuit"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <CircuitBreakerDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "ws" && (
+                                    <motion.div
+                                        key="ws"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <WebSocketDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "pool" && (
+                                    <motion.div
+                                        key="pool"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <ConnectionPoolDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "idempotency" && (
+                                    <motion.div
+                                        key="idempotency"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <IdempotencyDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "hash" && (
+                                    <motion.div
+                                        key="hash"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <HashingDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "graphql" && (
+                                    <motion.div
+                                        key="graphql"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <GraphqlDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "replication" && (
+                                    <motion.div
+                                        key="replication"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <ReplicationDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "events" && (
+                                    <motion.div
+                                        key="events"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <EventSourcingDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "trace" && (
+                                    <motion.div
+                                        key="trace"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <TracingDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "saga" && (
+                                    <motion.div
+                                        key="saga"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <SagaPatternDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "vector" && (
+                                    <motion.div
+                                        key="vector"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <VectorSearchDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "serverless" && (
+                                    <motion.div
+                                        key="serverless"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <ServerlessColdStartDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "sharding" && (
+                                    <motion.div
+                                        key="sharding"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <ShardingDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "mesh" && (
+                                    <motion.div
+                                        key="mesh"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <ServiceMeshDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "cdc" && (
+                                    <motion.div
+                                        key="cdc"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <CdcDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "bloom" && (
+                                    <motion.div
+                                        key="bloom"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <BloomFilterDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "bluegreen" && (
+                                    <motion.div
+                                        key="bluegreen"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <BlueGreenDeployDemo />
+                                    </motion.div>
+                                )}
+                                {activeTab === "gateway" && (
+                                    <motion.div key="gateway" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><ApiGatewayDemo /></motion.div>
+                                )}
+                                {activeTab === "cdn" && (
+                                    <motion.div key="cdn" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CdnDemo /></motion.div>
+                                )}
+                                {activeTab === "oauth" && (
+                                    <motion.div key="oauth" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><OAuthDemo /></motion.div>
+                                )}
+                                {activeTab === "snowflake" && (
+                                    <motion.div key="snowflake" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SnowflakeIdDemo /></motion.div>
+                                )}
+                                {activeTab === "leader" && (
+                                    <motion.div key="leader" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><LeaderElectionDemo /></motion.div>
+                                )}
+                                {activeTab === "gossip" && (
+                                    <motion.div key="gossip" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GossipProtocolDemo /></motion.div>
+                                )}
+                                {activeTab === "twopc" && (
+                                    <motion.div key="twopc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><TwoPhaseCommitDemo /></motion.div>
+                                )}
+                                {activeTab === "merkle" && (
+                                    <motion.div key="merkle" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MerkleTreeDemo /></motion.div>
+                                )}
+                                {activeTab === "geohash" && (
+                                    <motion.div key="geohash" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><GeohashingDemo /></motion.div>
+                                )}
+                                {activeTab === "mapreduce" && (
+                                    <motion.div key="mapreduce" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><MapReduceDemo /></motion.div>
+                                )}
+                                {activeTab === "btree" && (
+                                    <motion.div key="btree" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DatabaseIndexingDemo /></motion.div>
+                                )}
+                                {activeTab === "dns" && (
+                                    <motion.div key="dns" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><DnsResolutionDemo /></motion.div>
+                                )}
+                                {activeTab === "sse" && (
+                                    <motion.div key="sse" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><SseDemo /></motion.div>
+                                )}
+                                {activeTab === "encrypt" && (
+                                    <motion.div key="encrypt" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><EncryptionDemo /></motion.div>
+                                )}
+                                {activeTab === "cap" && (
+                                    <motion.div key="cap" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CapTheoremDemo /></motion.div>
+                                )}
+                                {activeTab === "kafka" && (
+                                    <motion.div key="kafka" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><KafkaStreamsDemo /></motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
