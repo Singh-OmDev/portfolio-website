@@ -1,4 +1,5 @@
 "use client";
+import { Analytics } from '@vercel/analytics/next';
 
 import { useState, useEffect } from "react";
 import { Playfair_Display, Inter } from "next/font/google"; // Import fonts
@@ -54,6 +55,8 @@ export default function RootLayout({
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         {children}
+                <Analytics />
+
       </body>
     </html>
   );
