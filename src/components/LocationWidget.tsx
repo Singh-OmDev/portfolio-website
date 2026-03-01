@@ -71,7 +71,7 @@ export default function LocationWidget() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full text-sm font-bold font-serif text-neutral-800 dark:text-neutral-100 shadow-sm w-fit whitespace-nowrap"
+            className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full text-sm font-medium text-neutral-800 dark:text-neutral-100 shadow-sm w-fit whitespace-nowrap"
         >
             <span className="flex items-center gap-2">
                 <span>📍</span>
