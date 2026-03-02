@@ -38,12 +38,11 @@ import DatabaseIndexingDemo from "./DatabaseIndexingDemo";
 import DnsResolutionDemo from "./DnsResolutionDemo";
 import SseDemo from "./SseDemo";
 import EncryptionDemo from "./EncryptionDemo";
-import CapTheoremDemo from "./CapTheoremDemo";
 import KafkaStreamsDemo from "./KafkaStreamsDemo";
 import { GitBranch, Fingerprint, BarChart, Brain, CloudLightning, Layers, Shield, DatabaseZap, Filter, SplitSquareHorizontal, Globe, Lock, UserSquare2, MessageCircle, ShieldCheck, GitMerge, Map, Blocks, TerminalSquare, Server, Database, ListOrdered, Activity, Network, Users, CreditCard, Hash, ArrowRightCircle, Info, Binary, Zap, ShieldAlert } from "lucide-react";
 
 export default function Playground() {
-    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen" | "gateway" | "cdn" | "oauth" | "snowflake" | "leader" | "gossip" | "twopc" | "merkle" | "geohash" | "mapreduce" | "btree" | "dns" | "sse" | "encrypt" | "cap" | "kafka">("rate");
+    const [activeTab, setActiveTab] = useState<"rate" | "load" | "cache" | "queue" | "jwt" | "circuit" | "ws" | "pool" | "idempotency" | "hash" | "graphql" | "replication" | "events" | "trace" | "saga" | "vector" | "serverless" | "sharding" | "mesh" | "cdc" | "bloom" | "bluegreen" | "gateway" | "cdn" | "oauth" | "snowflake" | "leader" | "gossip" | "twopc" | "merkle" | "geohash" | "mapreduce" | "btree" | "dns" | "sse" | "encrypt" | "kafka">("rate");
 
     const tabs = [
         { id: "rate", label: "Rate Limiter", icon: TerminalSquare, color: "text-green-500", bg: "bg-green-500/10" },
@@ -82,7 +81,6 @@ export default function Playground() {
         { id: "dns", label: "DNS Resolution", icon: Globe, color: "text-indigo-400", bg: "bg-indigo-400/10" },
         { id: "sse", label: "SSE vs Polling", icon: Zap, color: "text-yellow-400", bg: "bg-yellow-400/10" },
         { id: "encrypt", label: "Cryptography", icon: Lock, color: "text-rose-500", bg: "bg-rose-500/10" },
-        { id: "cap", label: "CAP Theorem", icon: ShieldAlert, color: "text-purple-500", bg: "bg-purple-500/10" },
         { id: "kafka", label: "Event Streams", icon: Layers, color: "text-emerald-400", bg: "bg-emerald-400/10" },
     ] as const;
 
@@ -123,7 +121,6 @@ export default function Playground() {
         dns: "What happens when you type google.com into your browser? Computers only understand IP addresses. The Domain Name System (DNS) is the phonebook of the internet, recursively querying servers across the globe to find an address.",
         sse: "Polling wastes CPU/Bandwidth. Long Polling holds connections open but still requires reconnection. SSE (Server-Sent Events) keeps a single persistent HTTP connection open, allowing the server to push data downward anytime.",
         encrypt: "Symmetric encryption uses the same key to lock and unlock data. Asymmetric encryption uses a mathematically linked Public/Private key pair. Anyone can lock data with the Public Key, but only the Private Key can unlock it.",
-        cap: "In a distributed data store, you can only guarantee two out of three: Consistency, Availability, or Partition Tolerance. Since networks always fail (P is mandatory), you must choose between CP (errors on disconnect) or AP (serves stale data).",
         kafka: "Unlike traditional databases that overwrite state, Kafka is an Append-Only Log. Producers blindly dump events onto the end of the log. Independent Consumers read the log at their own pace, tracking their own 'Offset'.",
     };
 
@@ -484,9 +481,6 @@ export default function Playground() {
                                 )}
                                 {activeTab === "encrypt" && (
                                     <motion.div key="encrypt" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><EncryptionDemo /></motion.div>
-                                )}
-                                {activeTab === "cap" && (
-                                    <motion.div key="cap" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><CapTheoremDemo /></motion.div>
                                 )}
                                 {activeTab === "kafka" && (
                                     <motion.div key="kafka" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}><KafkaStreamsDemo /></motion.div>
