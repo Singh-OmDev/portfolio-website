@@ -1,4 +1,6 @@
 # Minimal Portfolio website
+<img width="1887" height="861" alt="image" src="https://github.com/user-attachments/assets/2ede6b19-7642-470e-bcf4-8678ab505bc3" />
+
 
 A modern, fast, and interactive portfolio website built for showcasing projects, skills, and interactive backend architecture demonstrations.
 
