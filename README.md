@@ -1,60 +1,54 @@
-# Portfolio Website
- live demo https://portfoliowebsite-alpha-six.vercel.app/
+# Minimal Portfolio website
 
+A modern, fast, and interactive portfolio website built for showcasing projects, skills, and interactive backend architecture demonstrations.
 
-<img width="1893" height="865" alt="image" src="https://github.com/user-attachments/assets/22e0f9dc-f886-46c3-9d4e-35fba068fb08" />
+## 🚀 Tech Stack
 
+This project is built using modern web development tools:
 
-A minimalist, high-performance developer portfolio built with **Next.js 16**, **Tailwind CSS v4**, and **Framer Motion**. Features real-time music tracking via Last.fm, dynamic dark mode, and smooth page transitions
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Library**: [React](https://react.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Deployment**: Designed to be easily deployed on [Vercel](https://vercel.com/)
 
-## 🚀 Features
+## ✨ Key Features
 
--   **Minimalist Design**: Clean, typography-focused UI inspired by modern aesthetics.
--   **Dark/Light Mode**: Fully responsive theme toggling with system preference detection.
--   **Real-time Music**: "Now Playing" widget integrated with Last.fm API.
--   **Dynamic Projects**: Detailed project pages with deep linking and rich metadata.
--   **Animations**: Smooth entry/exit animations using Framer Motion.
--   **Interactive Elements**: "Oneko" mascot, visitor counter, and interactive skills pills.
--   **Contact Form**: Functional contact form powered by EmailJS.
+- **Interactive Playground**: Features a dedicated `/playground` route with dozens of interactive, visual demonstrations of complex backend and system design concepts (e.g., Load Balancers, Distributed Caching, Message Queues, etc.).
+- **Server and Client Components**: Strategically uses Next.js `use client` directives for interactive widget animations while keeping the rest of the site blazing fast with Server-Side Rendering (SSR).
+- **Responsive Design**: Fully responsive, mobile-first design leveraging Tailwind CSS.
+- **Dark Mode Support**: Built-in support for light and dark themes.
 
-## 🛠️ Tech Stack
+## 🛠️ Getting Started
 
--   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
--   **Language**: [TypeScript](https://www.typescriptlang.org/)
--   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
--   **Animation**: [Framer Motion](https://www.framer.com/motion/)
--   **Data Fetching**: [SWR](https://swr.vercel.app/)
--   **Icons**: [Lucide React](https://lucide.dev/)
--   **Deployment**: [Vercel](https://vercel.com/)
+To run this project locally on your machine, follow these steps:
 
-## 📦 Getting Started
+### Prerequisites
 
-### 1. Clone the repository
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-```bash
-git clone https://github.com/Singh-OmDev/portfolio-website.git
-cd portfolio-website
-```
+### Installation
 
-### 2. Install dependencies
+1. Clone the repository:
+   ```bash
+   git clone <your-github-repo-url>
+   ```
 
-```bash
-npm install
-```
+2. Navigate to the project directory:
+   ```bash
+   cd portfolio-website
+   ```
 
-### 3. Configure Environment Variables
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+   *(or `yarn install` / `pnpm install` depending on your package manager)*
 
-Create a `.env.local` file in the root directory and add your keys:
+### Running the Development Server
 
-```bash
-# Last.fm Configuration
-LASTFM_API_KEY=your_lastfm_api_key
-LASTFM_USERNAME=your_lastfm_username
-
-# (Optional) EmailJS Keys are currently hardcoded in src/components/Contact.tsx
-```
-
-### 4. Run the development server
+Start the local development server:
 
 ```bash
 npm run dev
@@ -62,16 +56,25 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🚀 Deployment (Vercel)
+## 🏗️ Building for Production
 
-The easiest way to deploy is using [Vercel](https://vercel.com).
+To create an optimized production build, run:
 
-1.  Push your code to concise GitHub repository.
-2.  Import the project into Vercel.
-3.  Add the **Environment Variables** (`LASTFM_API_KEY`, `LASTFM_USERNAME`) in the Vercel dashboard.
-4.  **Note:** Ensure your **Project Name** uses underscores (e.g., `portfolio_website`) if you encounter naming errors.
-5.  Click **Deploy**.
+```bash
+npm run build
+```
 
-## 📄 License
+Then, to start the production server:
 
-This project is open source and available under the [MIT License](LICENSE).
+```bash
+npm run start
+```
+
+## 📂 Project Structure
+
+- `src/app/`: Contains the Next.js App Router pages (Home, Projects, Playground, Layouts).
+- `src/components/`: Contains all reusable UI components and the interactive playground widgets.
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
