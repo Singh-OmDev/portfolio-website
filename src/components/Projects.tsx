@@ -44,7 +44,7 @@ export default function Projects() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl text-neutral-400 font-serif max-w-2xl mx-auto"
+                        className="text-xl text-neutral-600 dark:text-neutral-400 font-serif max-w-2xl mx-auto"
                     >
                         I&apos;ve worked on a variety of projects, from simple websites to complex applications. Here are a few of my favorites.
                     </motion.p>
@@ -96,15 +96,15 @@ export default function Projects() {
                                         </Link>
                                         {project.status && (
                                             <span className={`px-2 py-1 mt-1 text-[10px] font-bold uppercase tracking-wider rounded-md border whitespace-nowrap ${project.status === 'Completed' ? 'bg-green-100/50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800/50' :
-                                                    project.status === 'Building' || project.status === 'In Progress' ? 'bg-yellow-100/80 text-yellow-700 border-yellow-300 dark:bg-yellow-900/50 dark:text-yellow-400 dark:border-yellow-700/80' :
-                                                        project.status === 'Prototype' ? 'bg-purple-100/50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800/50' :
-                                                            'bg-neutral-100/50 text-neutral-700 border-neutral-200 dark:bg-neutral-800/50 dark:text-neutral-400 dark:border-neutral-700/50'
+                                                project.status === 'Building' || project.status === 'In Progress' ? 'bg-yellow-100/80 text-yellow-700 border-yellow-300 dark:bg-yellow-900/50 dark:text-yellow-400 dark:border-yellow-700/80' :
+                                                    project.status === 'Prototype' ? 'bg-purple-100/50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800/50' :
+                                                        'bg-neutral-100/50 text-neutral-700 border-neutral-200 dark:bg-neutral-800/50 dark:text-neutral-400 dark:border-neutral-700/50'
                                                 }`}>
                                                 {project.status === 'Building' ? 'In Progress' : project.status}
                                             </span>
                                         )}
                                     </div>
-                                    <p className="text-neutral-400 font-serif mb-4 min-h-[3rem]">
+                                    <p className="text-neutral-600 dark:text-neutral-400 font-serif mb-4 min-h-[3rem]">
                                         {project.description}
                                     </p>
 
