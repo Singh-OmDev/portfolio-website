@@ -88,11 +88,22 @@ export default function Projects() {
 
                                 {/* Text Content */}
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <Link href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`} className="block">
-                                        <h3 className="text-2xl font-serif font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                            {project.title}
-                                        </h3>
-                                    </Link>
+                                    <div className="flex justify-between items-start mb-2 gap-4">
+                                        <Link href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`} className="block">
+                                            <h3 className="text-2xl font-serif font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                                {project.title}
+                                            </h3>
+                                        </Link>
+                                        {project.status && (
+                                            <span className={`px-2 py-1 mt-1 text-[10px] font-bold uppercase tracking-wider rounded-md border whitespace-nowrap ${project.status === 'Completed' ? 'bg-green-100/50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800/50' :
+                                                    project.status === 'Building' || project.status === 'In Progress' ? 'bg-yellow-100/80 text-yellow-700 border-yellow-300 dark:bg-yellow-900/50 dark:text-yellow-400 dark:border-yellow-700/80' :
+                                                        project.status === 'Prototype' ? 'bg-purple-100/50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800/50' :
+                                                            'bg-neutral-100/50 text-neutral-700 border-neutral-200 dark:bg-neutral-800/50 dark:text-neutral-400 dark:border-neutral-700/50'
+                                                }`}>
+                                                {project.status === 'Building' ? 'In Progress' : project.status}
+                                            </span>
+                                        )}
+                                    </div>
                                     <p className="text-neutral-400 font-serif mb-4 min-h-[3rem]">
                                         {project.description}
                                     </p>

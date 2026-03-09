@@ -55,8 +55,12 @@ export default function ProjectDetail() {
                 >
                     <div className="flex flex-wrap gap-3 mb-6">
                         {project.status && (
-                            <span className="px-3 py-1 text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-full border border-green-200 dark:border-green-800 uppercase tracking-wide">
-                                {project.status}
+                            <span className={`px-3 py-1 text-xs font-bold rounded-full border uppercase tracking-wide ${project.status === 'Completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-800' :
+                                    project.status === 'Building' || project.status === 'In Progress' ? 'bg-yellow-100/80 text-yellow-700 border-yellow-300 dark:bg-yellow-900/50 dark:text-yellow-400 dark:border-yellow-700/80' :
+                                        project.status === 'Prototype' ? 'bg-purple-100/50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800/50' :
+                                            'bg-neutral-100/50 text-neutral-700 border-neutral-200 dark:bg-neutral-800/50 dark:text-neutral-400 dark:border-neutral-700/50'
+                                }`}>
+                                {project.status === 'Building' ? 'In Progress' : project.status}
                             </span>
                         )}
                         {project.tech.slice(0, 3).map((tech) => (

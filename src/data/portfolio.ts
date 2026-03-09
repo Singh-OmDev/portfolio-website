@@ -139,7 +139,7 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
             role: "Lead Developer",
             timeline: "2024",
             team: "Hackathon Team",
-            status: "Prototype",
+            status: "Completed",
             overview: "AI Government Scheme Advisor is a comprehensive web application designed to bridge the gap between Indian citizens and government welfare schemes. Using advanced AI (Llama 3.3 via Groq), it analyzes user profiles to discover relevant Central and State government schemes, explaining eligibility criteria, required documents, and application processes in simple, easy-to-understand language.",
             features: [
                 "**AI-Powered Recommendations**: Utilizes Llama 3.3 (via Groq) to analyze user data and suggest highly relevant schemes.",
@@ -161,70 +161,90 @@ I build impactful systems, embrace challenging problems, and maintain a high sta
                 "WhatsApp bot version for wider reach."
             ]
         },
+
+
         {
-            id: "workqueue",
-            title: "WorkQueue",
-            description:
-                "A distributed background job processing system powered by Redis, enabling reliable asynchronous task execution at scale.",
-            tech: ["Go", "Redis", "REST APIs"],
-            link: "#",
-            github: "#",
-            image:
-                "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-            role: "Backend Engineer",
-            timeline: "2023",
-            team: "Solo",
-            status: "In Progress",
-            overview: "WorkQueue is a lightweight alternative to systems like BullMQ or Sidekiq, written in Go. It allows applications to offload heavy tasks (image processing, email sending) to background workers, ensuring the main API remains responsive.",
-            features: [
-                "**Reliable Queuing**: Uses Redis lists for atomic push/pop operations.",
-                "**Retry Mechanism**: Exponential backoff strategies for failed jobs.",
-                "**Worker Pools**: Concurrency control to prevent system overload.",
-                "**Dashboard**: Simple UI to monitor queue depth and job status."
+            id: "dev-companion",
+            title: "Dev Companion Platform (DevOS)",
+            description: "A centralized, AI-powered command center for developers integrating standup generation, repository visualization, and daily task tracking.",
+            tech: [
+                "React 19",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "Tailwind CSS",
+                "Clerk Auth",
+                "React Flow",
+                "Groq AI",
+                "Google Generative AI"
             ],
-            challenges: "Handling **race conditions** when multiple workers try to claim the same job was tricky. I implemented Lua scripts in Redis to ensure atomicity of the 'claim' operation.",
+            link: "#",
+            github: "#", // Add your repo link here
+            image: "/devos.png", // Ensure the uploaded photo is saved as devos.png in the public folder
+            role: "Full-Stack Developer",
+            timeline: "2026",
+            team: "Solo",
+            status: "Building",
+            overview: "Dev Companion Platform (DevOS) was built to solve developer tool fragmentation by providing a single, unified dashboard. It actively tracks Leetcode progress, interfaces with GitHub for real-time statistics, maps out repository architectures visually, and leverages LLMs to generate daily technical standup reports and missions.",
+            features: [
+                "AI-Powered Automation: Generates daily technical standups and missions using Groq and Google Generative AI.",
+                "Interactive Architecture Maps: Uses React Flow to visually document and explore complex Node/React repository structures.",
+                "Centralized Developer Dashboard: Real-time tracking of GitHub activity, LeetCode progress, and personal goals.",
+                "Secure Identity Management: Implements robust authentication via Clerk and GitHub OAuth.",
+                "Modern, Responsive UI: Constructed with React 19, styled natively with Tailwind CSS, and animated via Framer Motion."
+            ],
+            challenges: "Managing complex, modular global state across varied dashboard widgets without performance degradation. Additionally, orchestrating multiple asynchronous data streams from third-party APIs (GitHub, Clerk, AI SDKs) while ensuring the React Flow architectural visualizations rendered smoothly on large codebases.",
             learnings: [
-                "Mastered **Go concurrency patterns** (Goroutines, Channels).",
-                "Deep dive into **Redis data structures** beyond simple Key-Value.",
-                "Understanding of **Distributed System guarantees** (At-least-once delivery)."
+                "Mastered global state management and modular architecture using Zustand in React 19.",
+                "Gained deep experience in constructing interactive, node-based visual interfaces with React Flow.",
+                "Learned to effectively orchestrate multi-model AI workflows for developer productivity (Groq/Gemini).",
+                "Strengthened full-stack OAuth implementation and JWT session handling securely within a MERN environment."
             ],
             future: [
-                "Support for priority queues.",
-                "Scheduled/Cron jobs.",
-                "gRPC interface for lower latency."
+                "Real-time collaborative diagramming for team architecture reviews.",
+                "Direct integration with Jira/Linear for bi-directional task synchronization.",
+                "Developing a VS Code extension for seamless, side-by-side companion access."
             ]
         },
         {
-            id: "clipx",
-            title: "ClipX",
+            id: "mini-rest-countries-explorer",
+            title: "Mini REST Countries Explorer",
             description:
-                "A minimal platform for downloading and clipping X (Twitter) videos, optimized for speed and simplicity.",
-            tech: ["Next.js", "React", "REST APIs"],
-            link: "#",
-            github: "#",
-            image:
-                "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80",
-            role: "Frontend Engineer",
-            timeline: "2023",
+                "A cool, interactive web application that lets you explore country data using the new React Router V7 framework.",
+            tech: [
+                "React",
+                "React Router V7",
+                "TypeScript",
+                "Tailwind CSS",
+                "Vite",
+                "REST APIs"
+            ],
+            link: "https://react-router-v7-countries-app-seven.vercel.app",
+            github: "https://github.com/Singh-OmDev/-React-Router-V7-Countries-App",
+            image: "/countries-app.png",
+            role: "Frontend Developer",
+            timeline: "2024",
             team: "Solo",
             status: "Completed",
-            overview: "ClipX was born out of frustration with ad-heavy, slow video downloaders. It uses a reverse-engineered internal API to fetch video variants and provides a clean, one-click interface to download them without watermarks.",
+            overview:
+                "Mini REST Countries Explorer is an interactive web application that leverages the new React Router V7 framework to fetch and display country data from the REST Countries API. It allows users to dynamically search, filter, and view detailed information about countries, including their names, capitals, regions, populations, and flags.",
             features: [
-                "**Instant Fetch**: Resolves video URLs in under 200ms.",
-                "**Quality Selection**: Choose between 1080p, 720p, or mobile-optimized versions.",
-                "**PWA Support**: Installable as a native-like app on mobile.",
-                "**No Ads**: Strictly utility-focused design."
+                "**Dynamic Routing**: Leverages React Router V7 for handling multiple routes and dynamic URL parameters.",
+                "**Data Fetching**: Uses modern route loaders to retrieve real-time country data from the REST API.",
+                "**Search & Filter**: Users can instantly search for countries by name and filter them by region.",
+                "**Responsive UI**: Fully styled with Tailwind CSS to create a modern, performant, and responsive interface."
             ],
-            challenges: "Twitter/X frequently changes their DOM structure and API signatures. Maintaining the scraper required setting up **automated integration tests** that run daily to detect breakage early.",
+            challenges:
+                "Migrating and adapting data loading patterns to the newly released React Router V7 data APIs required careful architectural planning to ensure optimal performance and user experience.",
             learnings: [
-                "Reverse engineering **private APIs** and network traffic analysis.",
-                "Building **PWAs (Progressive Web Apps)** with Next.js.",
-                "Handling binary data blobs in the browser."
+                "Mastered **React Router V7** core concepts including nested routing and data loaders.",
+                "Improved proficiency in **TypeScript** for robust component property definitions.",
+                "Gained experience managing external API rate limits and rendering logic for large datasets."
             ],
             future: [
-                "Support for Instagram Reels and TikTok.",
-                "Server-side caching for popular videos.",
-                "Browser extension for quick access."
+                "Add a dark mode toggle.",
+                "Implement a detailed border-countries navigation feature.",
+                "Add interactive maps for each country."
             ]
         },
     ],
