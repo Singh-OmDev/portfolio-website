@@ -24,7 +24,7 @@
 
 /* View Transitions for Dark Mode Toggle (Corner Reveal) */
 ::view-transition-group(root) {
-  animation-duration: 0.7s;
+  animation-duration: 1.5s;
   animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
@@ -41,13 +41,13 @@
 
 .dark::view-transition-new(root) {
   z-index: 2147483646;
-  animation: reveal 0.7s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: reveal 1.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 /* Switching to Light Mode */
 html:not(.dark)::view-transition-old(root) {
   z-index: 2147483646;
-  animation: reveal 0.7s cubic-bezier(0.76, 0, 0.24, 1) reverse forwards;
+  animation: reveal 1.5s cubic-bezier(0.76, 0, 0.24, 1) reverse forwards;
 }
 
 html:not(.dark)::view-transition-new(root) {
