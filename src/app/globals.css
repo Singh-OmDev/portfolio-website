@@ -22,48 +22,6 @@
   }
 }
 
-/* View Transitions for Dark Mode Toggle (Corner Reveal) */
-::view-transition-group(root) {
-  animation-duration: 1.5s;
-  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-/* Switching to Dark Mode */
-.dark::view-transition-old(root) {
-  z-index: 1;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 2147483646;
-  animation: reveal 1.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
-/* Switching to Light Mode */
-html:not(.dark)::view-transition-old(root) {
-  z-index: 2147483646;
-  animation: reveal 1.5s cubic-bezier(0.76, 0, 0.24, 1) reverse forwards;
-}
-
-html:not(.dark)::view-transition-new(root) {
-  z-index: 1;
-}
-
-@keyframes reveal {
-  from {
-    clip-path: circle(0% at 100% 0%);
-  }
-
-  to {
-    clip-path: circle(150% at 100% 0%);
-  }
-}
-
 /* Matrix Mode Overrides */
 .matrix-mode body * {
   color: #0F0 !important;
