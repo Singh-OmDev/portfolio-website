@@ -5,6 +5,8 @@ import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "fr
 import { Home, Moon, Sun, Github, Globe, FileText } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
+import { flushSync } from "react-dom";
+
 export default function Navbar() {
     const [isDark, setIsDark] = useState(false);
     const { socials } = portfolioData;
@@ -19,12 +21,28 @@ export default function Navbar() {
     }, []);
 
     const toggleTheme = () => {
-        setIsDark(!isDark);
-        if (!isDark) {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
+        const toggle = () => {
+            setIsDark((prev) => {
+                const n = !prev;
+                if (n) {
+                    document.documentElement.classList.add("dark");
+                } else {
+                    document.documentElement.classList.remove("dark");
+                }
+                return n;
+            });
+        };
+
+        if (!document.startViewTransition) {
+            toggle();
+            return;
         }
+
+        document.startViewTransition(() => {
+            flushSync(() => {
+                toggle();
+            });
+        });
     };
 
     return (
