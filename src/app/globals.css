@@ -8,6 +8,13 @@
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
+
+  *,
+  ::before,
+  ::after {
+    @apply transition-colors duration-300;
+  }
+
   body {
     @apply font-sans;
   }
