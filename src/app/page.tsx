@@ -8,6 +8,35 @@ import Contact from "@/components/Contact";
 import GithubGraph from "@/components/GithubGraph";
 import Link from "next/link";
 import { ArrowRight, TerminalSquare } from "lucide-react";
+import { Metadata } from "next";
+import { portfolioData } from "@/data/portfolio";
+
+export const metadata: Metadata = {
+  title: `${portfolioData.profile.name} | ${portfolioData.profile.role}`,
+  description: portfolioData.profile.tagline,
+  openGraph: {
+    title: `${portfolioData.profile.name} | ${portfolioData.profile.role}`,
+    description: portfolioData.profile.tagline,
+    url: portfolioData.socials.website,
+    siteName: `${portfolioData.profile.name} Portfolio`,
+    images: [
+      {
+        url: portfolioData.profile.avatar,
+        width: 800,
+        height: 600,
+        alt: `${portfolioData.profile.name} Profile Image`,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${portfolioData.profile.name} | ${portfolioData.profile.role}`,
+    description: portfolioData.profile.tagline,
+    images: [portfolioData.profile.avatar],
+  },
+};
 
 export default function Home() {
   return (

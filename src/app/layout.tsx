@@ -7,6 +7,7 @@ import "./globals.css";
 import Mascot from "@/components/Mascot";
 import MatrixRain from "@/components/MatrixRain";
 import CommandPalette from "@/components/CommandPalette";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -56,6 +57,7 @@ export default function RootLayout({
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         <CommandPalette />
+        <VisitorCounter />
         {children}
         <Analytics />
 
