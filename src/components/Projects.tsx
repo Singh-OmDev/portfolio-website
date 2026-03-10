@@ -121,10 +121,10 @@ export default function Projects() {
                                     </div>
 
                                     {/* Buttons */}
-                                    <div className="flex gap-3 mt-auto">
+                                    <div className="flex flex-wrap items-center gap-3 mt-auto">
                                         <Link
                                             href={`/projects/${project.id || project.title.toLowerCase().replace(/ /g, "-")}`}
-                                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-bold font-serif hover:opacity-90 transition-opacity"
+                                            className="flex-grow flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-bold font-serif hover:opacity-90 transition-opacity"
                                         >
                                             View Details
                                         </Link>

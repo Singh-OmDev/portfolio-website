@@ -31,7 +31,7 @@ export default function About() {
                         Architecting Scalable & Reliable Systems
                     </h2>
 
-                    <div className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed space-y-6 text-left md:text-center">
+                    <div className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-6 text-left md:text-center">
                         {profile.bio.split('\n').filter(Boolean).map((line, index) => (
                             <p key={index}>{line}</p>
                         ))}
