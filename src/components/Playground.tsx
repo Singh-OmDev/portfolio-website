@@ -125,7 +125,7 @@ export default function Playground() {
     };
 
     return (
-        <section id="playground" className="py-12 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden">
+        <section id="playground" className="py-12 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden bg-white dark:bg-black">
             {/* Background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-200/10 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 

@@ -50,7 +50,7 @@ export default function Home() {
       <GithubGraph />
 
       {/* Backend Playground CTA */}
-      <section className="py-24 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden bg-neutral-50/50 dark:bg-neutral-900/20">
+      <section className="py-24 flex justify-center w-full px-6 relative z-10 w-full overflow-hidden bg-white dark:bg-black">
         <div className="max-w-4xl w-full text-center flex flex-col items-center">
           <div className="p-4 bg-neutral-200/50 dark:bg-neutral-800/50 rounded-2xl mb-6">
             <TerminalSquare size={32} className="text-neutral-700 dark:text-neutral-300" />
