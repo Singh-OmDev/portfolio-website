@@ -6,9 +6,9 @@ import { portfolioData } from "@/data/portfolio";
 import { Send, Phone, Mail, User, MessageSquare, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
-const SERVICE_ID = "service_wsgvkdq";
-const TEMPLATE_ID = "template_8jvbees";
-const PUBLIC_KEY = "SfcZ7ClRYlzgXod91";
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 
 export default function Contact() {
