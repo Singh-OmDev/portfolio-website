@@ -29,6 +29,9 @@ export default function Hero() {
 
                     <p className="text-xl md:text-2xl font-serif text-neutral-600 dark:text-neutral-200 leading-relaxed max-w-lg mb-6">
                         {profile.tagline}
+                    </p>
+
+                
 
                     {/* Spotify Widget placed here */}
                     <div className="w-full max-w-[280px]">
