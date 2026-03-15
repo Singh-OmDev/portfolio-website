@@ -51,11 +51,45 @@ export default function VisitorCounter() {
 
 
     return (
-        <div className="fixed bottom-10 right-10 z-50 flex items-center gap-2 px-3 py-1.5 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-full shadow-2xl text-xs font-medium text-neutral-600 dark:text-neutral-400 pointer-events-none select-none animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Eye size={14} className="opacity-70" />
-            <span>
-                Visitor <span className="font-mono font-bold text-black dark:text-white">{count > 0 ? count.toLocaleString() : "..."}</span>
-            </span>
+        <div className="fixed bottom-10 right-10 z-[100] group">
+            {/* The Animated Glow Effect */}
+            <div 
+                className="absolute inset-0 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-rainbow"
+                style={{
+                    background: "linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)",
+                    backgroundSize: "200% auto",
+                }}
+            />
+            
+            {/* The Main Pill */}
+            <div className="relative flex items-center gap-2 px-6 py-2.5 bg-neutral-950 border-[2px] border-transparent rounded-full shadow-2xl text-sm font-medium tracking-tight overflow-hidden p-[1px]">
+                {/* Border Animation Layer */}
+                <div 
+                    className="absolute inset-0 animate-rainbow"
+                    style={{
+                        background: "linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)",
+                        backgroundSize: "200% auto",
+                        margin: "-2px",
+                    }}
+                />
+                
+                {/* Content Overlay */}
+                <div className="relative flex items-center gap-2 px-5 py-2 bg-neutral-950 rounded-full w-full h-full">
+                    <span className="text-neutral-300">
+                        You are the <span className="font-mono font-bold text-white tracking-wider">{count > 0 ? count.toLocaleString() : "..."}</span> th visitor
+                    </span>
+                </div>
+            </div>
+
+            <style jsx>{`
+                @keyframes rainbow {
+                    0% { background-position: 0% 50%; }
+                    100% { background-position: 200% 50%; }
+                }
+                .animate-rainbow {
+                    animation: rainbow 3s linear infinite;
+                }
+            `}</style>
         </div>
     );
 }
