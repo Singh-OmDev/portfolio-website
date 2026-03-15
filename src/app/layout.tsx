@@ -9,7 +9,6 @@ import MatrixRain from "@/components/MatrixRain";
 import CommandPalette from "@/components/CommandPalette";
 import VisitorCounter from "@/components/VisitorCounter";
 import IntroScreen from "@/components/IntroScreen";
-import ScrollTracker from "@/components/ScrollTracker";
 import RobotMenu from "@/components/RobotMenu";
 
 const playfair = Playfair_Display({
@@ -59,7 +58,6 @@ export default function RootLayout({
       >
         <IntroScreen />
         <RobotMenu />
-        <ScrollTracker />
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         <CommandPalette />
