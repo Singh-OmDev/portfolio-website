@@ -8,6 +8,7 @@ import Mascot from "@/components/Mascot";
 import MatrixRain from "@/components/MatrixRain";
 import CommandPalette from "@/components/CommandPalette";
 import VisitorCounter from "@/components/VisitorCounter";
+import IntroScreen from "@/components/IntroScreen";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 transition-colors duration-300 selection:bg-neutral-200 dark:selection:bg-neutral-800 ${isMatrixMode ? "matrix-active" : ""}`}
       >
+        <IntroScreen />
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         <CommandPalette />
