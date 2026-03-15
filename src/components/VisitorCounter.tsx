@@ -51,7 +51,7 @@ export default function VisitorCounter() {
 
 
     return (
-        <div className="fixed bottom-8 right-8 z-[100] group cursor-default select-none pointer-events-auto">
+        <div className="fixed bottom-24 md:bottom-8 right-8 z-[100] group cursor-default select-none pointer-events-auto">
             {/* The Outer Glow - extremely faint */}
             <div className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-1000 bg-white" />
             
