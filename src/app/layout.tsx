@@ -7,7 +7,6 @@ import "./globals.css";
 import Mascot from "@/components/Mascot";
 import MatrixRain from "@/components/MatrixRain";
 import CommandPalette from "@/components/CommandPalette";
-import VisitorCounter from "@/components/VisitorCounter";
 import IntroScreen from "@/components/IntroScreen";
 import RobotMenu from "@/components/RobotMenu";
 
@@ -61,7 +60,6 @@ export default function RootLayout({
         <MatrixRain active={isMatrixMode} />
         <Mascot />
         <CommandPalette />
-        <VisitorCounter />
         {children}
         <Analytics />
 
