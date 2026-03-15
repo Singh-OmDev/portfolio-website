@@ -51,45 +51,18 @@ export default function VisitorCounter() {
 
 
     return (
-        <div className="fixed bottom-10 right-10 z-[100] group">
-            {/* The Animated Glow Effect */}
+        <div className="fixed bottom-10 right-10 z-[100] group pointer-events-none select-none">
+            {/* The Subtle Glow Effect */}
             <div 
-                className="absolute inset-0 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-rainbow"
-                style={{
-                    background: "linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)",
-                    backgroundSize: "200% auto",
-                }}
+                className="absolute inset-0 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 bg-neutral-400 dark:bg-white"
             />
             
             {/* The Main Pill */}
-            <div className="relative flex items-center gap-2 px-6 py-2.5 bg-neutral-950 border-[2px] border-transparent rounded-full shadow-2xl text-sm font-medium tracking-tight overflow-hidden p-[1px]">
-                {/* Border Animation Layer */}
-                <div 
-                    className="absolute inset-0 animate-rainbow"
-                    style={{
-                        background: "linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)",
-                        backgroundSize: "200% auto",
-                        margin: "-2px",
-                    }}
-                />
-                
-                {/* Content Overlay */}
-                <div className="relative flex items-center gap-2 px-5 py-2 bg-neutral-950 rounded-full w-full h-full">
-                    <span className="text-neutral-300">
-                        You are the <span className="font-mono font-bold text-white tracking-wider">{count > 0 ? count.toLocaleString() : "..."}</span> th visitor
-                    </span>
-                </div>
+            <div className="relative flex items-center gap-2 px-6 py-2.5 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-full shadow-2xl text-sm font-medium tracking-tight">
+                <span className="text-neutral-500 dark:text-neutral-400">
+                    You are the <span className="font-mono font-bold text-neutral-900 dark:text-white tracking-wider">{count > 0 ? count.toLocaleString() : "..."}</span> th visitor
+                </span>
             </div>
-
-            <style jsx>{`
-                @keyframes rainbow {
-                    0% { background-position: 0% 50%; }
-                    100% { background-position: 200% 50%; }
-                }
-                .animate-rainbow {
-                    animation: rainbow 3s linear infinite;
-                }
-            `}</style>
         </div>
     );
 }
