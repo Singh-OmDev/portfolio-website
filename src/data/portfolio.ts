@@ -6,13 +6,9 @@ export const portfolioData = {
         tagline:
             "Backend-focused engineering student building scalable systems and high-performance APIs, with a strong interest in system design and production-grade backend development.",
 
-        bio: `I’m a backend-focused developer with a strong foundation in computer science and a deep interest in building scalable, reliable systems. I primarily work within the JavaScript and TypeScript ecosystem, designing APIs, structuring databases, and developing backend services that are efficient, maintainable, and production-ready.
-
-I enjoy solving complex engineering problems, whether it’s optimizing performance, designing authentication flows, or implementing caching strategies. Through my projects, I focus on writing clean, modular code and building systems that handle real-world usage rather than just academic scenarios.
-
-Recently, I’ve been investing time in system design and distributed architecture to better understand how large-scale applications operate. My focus is on continuously improving my engineering depth while shipping software that delivers practical value.
-
-I build impactful systems, embrace challenging problems, and maintain a high standard for the software I create.`,
+        bio: `I bridge the gap between complex CS theory and **production-grade software**. As a Backend Engineer, I am passionate about creating **modular services** that are easy to test, scale, and evolve.
+ 
+ I thrive in the **MERN stack**, constantly refining my skills in **API Design** and database optimization. My goal is to build impactful digital products that solve real problems, maintaining a high standard for **code quality** and system integrity in every project I touch.`,
 
         avatar: "/profile.jpg",
     },

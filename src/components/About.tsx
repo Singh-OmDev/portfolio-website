@@ -33,7 +33,14 @@ export default function About() {
 
                     <div className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-6 text-left md:text-center">
                         {profile.bio.split('\n').filter(Boolean).map((line, index) => (
-                            <p key={index}>{line}</p>
+                            <p key={index}>
+                                {line.split(/(\*\*.*?\*\*)/).map((part, i) => {
+                                    if (part.startsWith('**') && part.endsWith('**')) {
+                                        return <strong key={i} className="text-neutral-900 dark:text-white font-bold">{part.slice(2, -2)}</strong>;
+                                    }
+                                    return part;
+                                })}
+                            </p>
                         ))}
                     </div>
                 </motion.div>
