@@ -51,18 +51,38 @@ export default function VisitorCounter() {
 
 
     return (
-        <div className="fixed bottom-10 right-10 z-[100] group pointer-events-none select-none">
-            {/* The Subtle Glow Effect */}
-            <div 
-                className="absolute inset-0 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 bg-neutral-400 dark:bg-white"
-            />
+        <div className="fixed bottom-8 right-8 z-[100] group cursor-default select-none pointer-events-auto">
+            {/* The Outer Glow - extremely faint */}
+            <div className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-1000 bg-white" />
             
-            {/* The Main Pill */}
-            <div className="relative flex items-center gap-2 px-6 py-2.5 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-full shadow-2xl text-sm font-medium tracking-tight">
-                <span className="text-neutral-500 dark:text-neutral-400">
-                    You are the <span className="font-mono font-bold text-neutral-900 dark:text-white tracking-wider">{count > 0 ? count.toLocaleString() : "..."}</span> th visitor
+            {/* The Main Glass Pill */}
+            <div className="relative flex items-center gap-2.5 px-5 py-2 bg-white/5 dark:bg-black/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10 group-hover:-translate-y-1">
+                
+                {/* Subtle Shimmer Sweep */}
+                <div className="absolute inset-0 w-full h-full animate-shimmer pointer-events-none" 
+                    style={{
+                        background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)",
+                        transform: "translateX(-100%)",
+                    }}
+                />
+
+                {/* Status Indicator */}
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] animate-pulse" />
+
+                <span className="text-[11px] font-medium tracking-widest uppercase text-neutral-500 dark:text-neutral-400">
+                    Visitor <span className="text-neutral-900 dark:text-neutral-100 font-bold ml-1">{count > 0 ? count.toLocaleString() : "..."}</span>
                 </span>
             </div>
+
+            <style jsx>{`
+                @keyframes shimmer {
+                    0% { transform: translateX(-100%); }
+                    30%, 100% { transform: translateX(100%); }
+                }
+                .animate-shimmer {
+                    animation: shimmer 4s ease-in-out infinite;
+                }
+            `}</style>
         </div>
     );
 }
