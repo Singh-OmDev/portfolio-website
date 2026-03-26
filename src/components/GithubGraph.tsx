@@ -61,15 +61,17 @@ export default function GithubGraph() {
                         <div className="h-px w-12 bg-neutral-900 dark:bg-white" />
                     </div>
 
-                    <div className="flex justify-center w-full overflow-x-auto pb-4 scrollbar-hide">
-                        <div className="min-w-max">
-                            <GitHubCalendar
-                                username={username}
-                                colorScheme={isDark ? "dark" : "light"}
-                                blockSize={12}
-                                blockMargin={4}
-                                fontSize={14}
-                            />
+                    <div className="flex justify-center w-full px-2">
+                        <div className="w-full max-w-[100vw] overflow-x-auto pb-4 scrollbar-hide flex justify-center sm:justify-start md:justify-center">
+                            <div className="min-w-max px-4">
+                                <GitHubCalendar
+                                    username={username}
+                                    colorScheme={isDark ? "dark" : "light"}
+                                    blockSize={14}
+                                    blockMargin={5}
+                                    fontSize={14}
+                                />
+                            </div>
                         </div>
                     </div>
                 </motion.div>

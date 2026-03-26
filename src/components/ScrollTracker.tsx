@@ -65,7 +65,7 @@ export default function ScrollTracker() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed top-4 right-6 z-50 pointer-events-none"
+          className="fixed top-24 right-6 z-40 pointer-events-none"
         >
           <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 shadow-lg">
             {/* Section name */}

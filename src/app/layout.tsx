@@ -46,13 +46,14 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         <title>Om Singh | Minimal Portfolio</title>
         <meta name="description" content="Backend Software Engineer Portfolio" />
         <link rel="icon" href="/icon.svg" />
       </head>
       <body
+        suppressHydrationWarning
         className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 transition-colors duration-300 selection:bg-neutral-200 dark:selection:bg-neutral-800 ${isMatrixMode ? "matrix-active" : ""}`}
       >
         <IntroScreen />

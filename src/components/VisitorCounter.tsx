@@ -19,7 +19,7 @@ export default function VisitorCounter({ isInline = false }: { isInline?: boolea
         const hasVisited = localStorage.getItem(localStorageKey);
 
         if (!hasVisited) {
-            fetch("/api/visitor?action=up")
+            fetch("/api/activity?action=up")
                 .then((res) => res.json())
                 .then((data) => {
                     setCount(data.count);
@@ -31,7 +31,7 @@ export default function VisitorCounter({ isInline = false }: { isInline?: boolea
                     setLoading(false);
                 });
         } else {
-            fetch("/api/visitor")
+            fetch("/api/activity")
                 .then((res) => res.json())
                 .then((data) => {
                     setCount(data.count);
