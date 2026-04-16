@@ -10,7 +10,7 @@ export const portfolioData = {
  
  I thrive in the **MERN stack**, constantly refining my skills in **API Design** and database optimization. My goal is to build impactful digital products that solve real problems, maintaining a high standard for **code quality** and system integrity in every project I touch.`,
 
-        avatar: "/profile.jpg",
+        avatar: "/profile.gif",
     },
 
     socials: {

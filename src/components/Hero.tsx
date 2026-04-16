@@ -48,14 +48,14 @@ export default function Hero() {
                 >
                     <div className="relative w-64 h-64 md:w-80 md:h-80">
                         <div className="absolute inset-0 rounded-full border border-neutral-200 dark:border-neutral-800 transform rotate-6 scale-105" />
-                        <div className="relative w-full h-full rounded-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-xl">
-                            <Image
+                        <div className="relative w-full h-full rounded-full overflow-hidden transition-all duration-700 shadow-xl">
+                            <video
                                 src={profile.avatar}
-                                alt={profile.name}
-                                fill
-                                sizes="(max-width: 768px) 256px, 320px"
-                                className="object-cover"
-                                priority
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     </div>
