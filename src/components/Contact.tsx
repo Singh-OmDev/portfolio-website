@@ -219,7 +219,7 @@ export default function Contact() {
                     className="mt-20 text-center text-neutral-400 text-sm flex flex-col items-center gap-3"
                 >
                     <p className="text-base font-serif italic text-neutral-400 dark:text-neutral-500 max-w-sm">
-                        &ldquo;First, solve the problem. Then, write the code.&rdquo;
+                        &ldquo;There are only two hard things in Computer Science: cache invalidation and naming things.&rdquo;
                     </p>
                     <VisitorCounter isInline={true} />
                     <p>&copy; {new Date().getFullYear()} Om Singh. All rights reserved.</p>

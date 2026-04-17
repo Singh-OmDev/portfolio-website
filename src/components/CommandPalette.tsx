@@ -13,7 +13,8 @@ import {
     Mail,
     Github,
     Linkedin,
-    Command as CommandIcon
+    Command as CommandIcon,
+    Cat
 } from "lucide-react";
 
 export default function CommandPalette() {
@@ -45,6 +46,10 @@ export default function CommandPalette() {
     const copyEmail = () => {
         navigator.clipboard.writeText("contact@omsingh.com"); // Replace with actual email later if needed
         alert("Email copied to clipboard!");
+    };
+
+    const toggleMascot = () => {
+        window.dispatchEvent(new CustomEvent('mascot-toggled'));
     };
 
     return (
@@ -110,6 +115,13 @@ export default function CommandPalette() {
                                 <Mail size={16} className="text-neutral-500 dark:text-neutral-400" />
                                 <span>Copy Email Address</span>
                                 <span className="ml-auto text-[11px] text-neutral-400 dark:text-neutral-500 font-normal">contact@omsingh.com</span>
+                            </Command.Item>
+                            <Command.Item
+                                onSelect={() => runCommand(toggleMascot)}
+                                className="flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer aria-selected:bg-black/5 dark:aria-selected:bg-white/10 text-neutral-700 dark:text-neutral-200 transition-none font-medium text-[13px] select-none"
+                            >
+                                <Cat size={16} className="text-neutral-500 dark:text-neutral-400" />
+                                <span>Toggle Mascot (Cat)</span>
                             </Command.Item>
                         </Command.Group>
 
