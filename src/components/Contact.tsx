@@ -11,6 +11,8 @@ const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 
+import VisitorCounter from "./VisitorCounter";
+
 export default function Contact() {
     const { socials } = portfolioData;
     const formRef = useRef<HTMLFormElement>(null);
@@ -217,8 +219,9 @@ export default function Contact() {
                     className="mt-20 text-center text-neutral-400 text-sm flex flex-col items-center gap-3"
                 >
                     <p className="text-base font-serif italic text-neutral-400 dark:text-neutral-500 max-w-sm">
-                        &ldquo;First, solve the problem. Then, write the code.&rdquo;
+                        &ldquo;There are only two hard things in Computer Science: cache invalidation and naming things.&rdquo;
                     </p>
+                    <VisitorCounter isInline={true} />
                     <p>&copy; {new Date().getFullYear()} Om Singh. All rights reserved.</p>
                     <p className="text-xs text-neutral-400 dark:text-neutral-500 select-none">What happens if you click the cat 5 times...?</p>
                 </motion.div>

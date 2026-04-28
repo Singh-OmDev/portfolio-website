@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Add your skin files to public/oneko/ and list them here
 const SKINS = [
@@ -271,6 +271,11 @@ const Oneko = ({
             aria-hidden="true"
             className="mascot-container"
             onClick={handleNekoClick}
+            onContextMenu={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('mascot-toggled'));
+            }}
+            title="Right-click to hide mascot"
             style={{
                 width: "32px",
                 height: "32px",
@@ -288,6 +293,19 @@ const Oneko = ({
 };
 
 export default function Mascot() {
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        const handleToggle = () => {
+            setIsVisible((prev) => !prev);
+        };
+
+        window.addEventListener("mascot-toggled", handleToggle);
+        return () => window.removeEventListener("mascot-toggled", handleToggle);
+    }, []);
+
+    if (!isVisible) return null;
+
     return (
         <Oneko initialPos={{ x: 32, y: 32 }} targetOffset={{ x: 0, y: 0 }} />
     );
