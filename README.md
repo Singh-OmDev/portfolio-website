@@ -1,6 +1,6 @@
 # Minimal Portfolio website
 
-  live -> https://portfoliowebsite-alpha-six.vercel.app/
+  live -> https://om-singh-portfolio.vercel.app/
 
 <img width="1887" height="861" alt="image" src="https://github.com/user-attachments/assets/2ede6b19-7642-470e-bcf4-8678ab505bc3" />
 
