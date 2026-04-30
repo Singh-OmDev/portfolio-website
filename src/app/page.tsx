@@ -19,14 +19,6 @@ export const metadata: Metadata = {
     description: portfolioData.profile.tagline,
     url: portfolioData.socials.website,
     siteName: `${portfolioData.profile.name} Portfolio`,
-    images: [
-      {
-        url: portfolioData.profile.avatar,
-        width: 800,
-        height: 600,
-        alt: `${portfolioData.profile.name} Profile Image`,
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -34,7 +26,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${portfolioData.profile.name} | ${portfolioData.profile.role}`,
     description: portfolioData.profile.tagline,
-    images: [portfolioData.profile.avatar],
   },
 };
 

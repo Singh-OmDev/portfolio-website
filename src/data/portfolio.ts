@@ -15,10 +15,8 @@ export const portfolioData = {
 
     socials: {
         github: "https://github.com/Singh-OmDev",
-        linkedin: "https://linkedin.com/in/yourusername",
         twitter: "https://twitter.com/omsingh8400",
         email: "mailto:omsingh8400@gmail.com",
-        website: "https://yourportfolio.com", 
         resume: "/resume.pdf?v=3",
         medium: "https://medium.com/@omsingh8400",
     },
